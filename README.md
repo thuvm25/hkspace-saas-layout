@@ -7,13 +7,13 @@ Layout và UI cho hệ thống SaaS subscription management dựa trên các sli
 ```
 hkspace-saas-layout/
 ├── custom.css                      # Custom CSS override (Bootstrap 5.3)
-├── landing-page.html               # Landing page - Slide 1 (Phan Tấn Dũng)
-├── checkout.html                   # Checkout - Slide 2 (Vũ Minh Thư)
-├── payment.html                    # Payment gateway - Slide 3 (Vũ Minh Thư)
-├── subscription.html               # Subscription - Slide 4-5 (Vũ Minh Thư)
-├── renew-plan.html                 # Renew Plan - Slide 7-9 (Vũ Minh Thư)
-├── change-plan-checkout.html       # Change Plan Checkout - Slide 6 (Vũ Minh Thư)
-├── add-seat-checkout.html          # Add Seat Checkout - Slide 6 (Vũ Minh Thư)
+├── landing-page.html
+├── checkout.html
+├── payment.html
+├── subscription.html
+├── renew-plan.html
+├── change-plan-checkout.html
+├── add-seat-checkout.html
 ```
 
 ## Công nghệ
@@ -103,18 +103,7 @@ hkspace-saas-layout/
 ### Responsive
 - Mobile-friendly với Bootstrap grid
 - Breakpoints: md (768px), lg (992px)
-
-## Cách sử dụng
-
-### HTML thuần (Vũ Minh Thư)
-1. Mở file HTML trực tiếp trong browser
-2. Hoặc serve với local server:
-```bash
-python -m http.server 8000
-# hoặc
-php -S localhost:8000
-```
-
+ 
 ### Lưu ý
 - Tất cả các file HTML đều độc lập, có thể mở trực tiếp
 - JavaScript được embed trong HTML để xử lý navigation
