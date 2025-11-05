@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gia hạn gói đăng ký - HKSpace SaaS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="custom.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="landing-page.html" class="navbar-brand">HKSpace</a>
+            <ul class="navbar-nav">
+                <li><a href="landing-page.html">Bảng giá</a></li>
+                <li><a href="subscription.html" class="active">Gói đăng ký</a></li>
+                <li><a href="checkout.html">Thanh toán</a></li>
+                <li><a href="payment.html">Cổng thanh toán</a></li>
+            </ul>
+            <div class="user-profile">
+                <div class="user-avatar">AP</div>
+                <span>Anh Phan</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 mb-5">
+        <!-- Header -->
+        <div class="mb-4">
+            <h1 id="page-title">Gia hạn gói đăng ký</h1>
+            <p class="text-secondary">Quản lý và gia hạn gói đăng ký của bạn</p>
+        </div>
+        
+        <div class="row">
+            <!-- Left Column -->
+            <div class="col-md-8">
+                <!-- Account Information (Ended) -->
+                <div class="card mb-4" id="account-ended-section" style="border: none; box-shadow: var(--shadow-md);">
+                    <div class="card-body p-4">
+                        <h3 class="fw-bold mb-3">Thông tin tài khoản</h3>
+                        <div class="d-flex align-items-center gap-2 mb-3">
+                            <span class="badge" style="background: var(--error); color: white; padding: 0.375rem 0.75rem; border-radius: 6px;">Đã hết hạn</span>
+                        </div>
+                        <p class="text-secondary mb-0" style="line-height: 1.7;">
+                            Bạn chưa đăng ký gói nào. Hiện tại không thể sử dụng dịch vụ.<br>
+                            Vui lòng chọn gói phù hợp và đăng ký để bắt đầu sử dụng.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Account Information (Active) - Current Plan -->
+                <div class="card mb-4 d-none" id="account-active-section" style="border: none; box-shadow: var(--shadow-md);">
+                    <div class="card-body p-4">
+                        <h3 class="fw-bold mb-4">Gói hiện tại</h3>
+                        
+                        <div class="mb-4">
+                            <div class="d-flex align-items-center mb-2">
+                                <h4 class="mb-0">Gói của bạn là <strong class="text-primary">Basic</strong></h4>
+                            </div>
+                            <p class="text-secondary mb-3">Giải pháp phù hợp cho các team bắt đầu</p>
+                            
+                            <div class="mb-3">
+                                <span class="text-secondary">Hoạt động đến</span>
+                                <span class="fw-bold ms-2">15/10/2025</span>
+                            </div>
+                            <p class="text-secondary small mb-3">
+                                Chúng tôi sẽ gửi thông báo khi gói đăng ký sắp hết hạn
+                            </p>
+                            
+                            <div class="d-flex align-items-baseline gap-2 mb-2">
+                                <span class="h4 fw-bold mb-0">$15</span>
+                                <span class="text-secondary">/thành viên/tháng</span>
+                                <span class="badge" style="background: var(--primary); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 11px;">Phổ biến</span>
+                            </div>
+                            <p class="text-secondary small mb-3">Gói tiêu chuẩn cho các doanh nghiệp nhỏ và vừa</p>
+                        </div>
+                        
+                        <div class="d-flex gap-2 flex-wrap mb-4">
+                            <button class="btn btn-primary" onclick="changePlan()" style="border-radius: var(--radius-md); padding: 0.625rem 1.25rem;">Đổi gói</button>
+                            <button class="btn btn-outline-danger" onclick="cancelSubscription()" style="border-radius: var(--radius-md); padding: 0.625rem 1.25rem;">Hủy đăng ký</button>
+                        </div>
+                        
+                        <div class="mt-4 pt-3 border-top">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="text-secondary small">Ngày dùng thử</span>
+                                <span class="fw-bold small">10 / 15 ngày</span>
+                            </div>
+                            <div class="progress mb-2" style="height: 8px; background: var(--bg-tertiary); border-radius: 10px;">
+                                <div class="progress-bar" role="progressbar" style="width: 66.67%; background: var(--primary); border-radius: 10px;" id="trial-progress"></div>
+                            </div>
+                            <p class="text-secondary small mb-0">
+                                Còn <strong>5 ngày</strong> nữa là sẽ kết thúc dùng thử và hóa đơn tiếp theo sẽ là <strong>$10 (2 seat)</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Payment Methods Section -->
+                <div class="card mb-4 d-none" id="payment-methods-section" style="border: none; box-shadow: var(--shadow-md);">
+                    <div class="card-body p-4">
+                        <h3 class="fw-bold mb-4">Phương thức thanh toán</h3>
+                        
+                        <!-- Payment Method Selection -->
+                        <div class="mb-4">
+                            <div class="form-check mb-3" style="padding: 1rem; border: 2px solid var(--primary); border-radius: var(--radius-md); background: rgba(37, 99, 235, 0.05);">
+                                <input class="form-check-input" type="radio" name="paymentMethodType" id="paymentCard" value="card" checked style="margin-top: 0.5rem;">
+                                <label class="form-check-label w-100" for="paymentCard" style="cursor: pointer;">
+                                    <strong>Thẻ ghi nợ/Tín dụng/ATM</strong>
+                                </label>
+                            </div>
+                            
+                            <div class="form-check" style="padding: 1rem; border: 2px solid var(--border); border-radius: var(--radius-md);">
+                                <input class="form-check-input" type="radio" name="paymentMethodType" id="paymentPaypal" value="paypal" style="margin-top: 0.5rem;">
+                                <label class="form-check-label w-100" for="paymentPaypal" style="cursor: pointer;">
+                                    <strong>Tài khoản PayPal</strong>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Card Input Form -->
+                        <div id="card-form-section">
+                            <div class="row g-3 mb-3">
+                                <div class="col-12">
+                                    <label class="form-label fw-bold">Số thẻ</label>
+                                    <input type="text" class="form-control" placeholder="1356 3215 6548 7898" maxlength="19" style="border-radius: var(--radius-md);">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-bold">Tên chủ thẻ</label>
+                                    <input type="text" class="form-control" placeholder="John Doe" style="border-radius: var(--radius-md);">
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label fw-bold">Ngày hết hạn</label>
+                                    <input type="text" class="form-control" placeholder="MM/YY" maxlength="5" style="border-radius: var(--radius-md);">
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label fw-bold">
+                                        Mã CVV
+                                        <span class="text-secondary" style="font-size: 12px; cursor: help;" title="Mã bảo mật 3 chữ số ở mặt sau thẻ">?</span>
+                                    </label>
+                                    <input type="text" class="form-control" placeholder="654" maxlength="3" style="border-radius: var(--radius-md);">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- My Cards Section -->
+                        <div class="mt-4 pt-3 border-top">
+                            <h5 class="fw-bold mb-3">Thẻ của tôi</h5>
+                            <div class="card" style="border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--bg-secondary);">
+                                <div class="card-body p-3">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center gap-3">
+                                            <div style="width: 40px; height: 30px; background: linear-gradient(135deg, #ff6b6b, #ffa500); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 12px;">MC</div>
+                                            <div>
+                                                <div class="fw-bold">Anh Phan</div>
+                                                <div class="text-secondary small">**** **** 9856</div>
+                                                <div class="text-secondary small">Thẻ hết hạn: 12/26</div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span class="badge" style="background: var(--success); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 11px;">Chính</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-2 mt-3">
+                                        <button class="btn btn-sm btn-outline-primary" style="border-radius: var(--radius-md); flex: 1;">Chỉnh sửa</button>
+                                        <button class="btn btn-sm btn-outline-danger" style="border-radius: var(--radius-md); flex: 1;">Xóa</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Change Plan Section -->
+                <div class="d-none" id="change-plan-section">
+                    <div class="card mb-4" style="border: none; box-shadow: var(--shadow-md);">
+                        <div class="card-body p-4">
+                            <h3 class="fw-bold mb-2">Đổi gói</h3>
+                            <p class="text-secondary mb-4">Chọn gói bên dưới để thay đổi</p>
+                        </div>
+                    </div>
+                    
+                    <h3 class="fw-bold mb-4">Bảng giá</h3>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="pricing-card">
+                                <div class="pricing-card-title">Free</div>
+                                <div class="pricing-card-price">
+                                    <div>Miễn phí dùng thử</div>
+                                    <div>$0/thành viên/tháng</div>
+                                    <div>Dùng thử trọn đời</div>
+                                </div>
+                                <ul class="pricing-card-features">
+                                    <li>Tối đa member: 5</li>
+                                    <li>AI Basic: Không</li>
+                                    <li>Hỗ trợ 24/7: Không</li>
+                                    <li>Blocks: 100</li>
+                                </ul>
+                                <button class="pricing-card-btn" onclick="selectPlan('free', 'change')">
+                                    Đổi gói
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="pricing-card">
+                                <div class="pricing-card-title">Basic</div>
+                                <div class="pricing-card-price">
+                                    <div>Miễn phí dùng thử</div>
+                                    <div>$15/thành viên/tháng</div>
+                                    <div>Dùng thử 15 ngày</div>
+                                </div>
+                                <ul class="pricing-card-features">
+                                    <li>Tối đa member: 1,000</li>
+                                    <li>AI Basic: Có</li>
+                                    <li>Hỗ trợ 24/7: Có</li>
+                                    <li>Blocks: Không giới hạn</li>
+                                </ul>
+                                <button class="pricing-card-btn" onclick="selectPlan('basic', 'change')">
+                                    Đổi gói
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="pricing-card">
+                                <div class="pricing-card-title">Advanced</div>
+                                <div class="pricing-card-price">
+                                    <div>Miễn phí dùng thử</div>
+                                    <div>$23/thành viên/tháng</div>
+                                    <div>Dùng thử 15 ngày</div>
+                                </div>
+                                <ul class="pricing-card-features">
+                                    <li>Tối đa member: Không giới hạn</li>
+                                    <li>AI Basic: Có</li>
+                                    <li>Hỗ trợ 24/7: Có</li>
+                                    <li>Blocks: Không giới hạn</li>
+                                </ul>
+                                <button class="pricing-card-btn" onclick="selectPlan('advanced', 'change')">
+                                    Đổi gói
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Add Seat Section -->
+                <div class="card d-none" id="add-seat-section" style="border: none; box-shadow: var(--shadow-md);">
+                    <div class="card-body p-4">
+                        <h3 class="fw-bold mb-2">Thêm seat</h3>
+                        <p class="text-secondary mb-4">Vui lòng điền thông tin để thêm seat vào gói đăng ký</p>
+                        
+                        <div class="mb-4">
+                            <a href="add-seat-checkout.html" class="btn btn-primary btn-lg w-100 py-3" style="border-radius: var(--radius-md);">
+                                Tiếp tục thêm seat
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Seat Information -->
+                <div class="seat-section card" id="seat-section" style="border: none; box-shadow: var(--shadow-md);">
+                    <div class="card-body p-4">
+                        <h3 class="fw-bold mb-3">Thông tin seat</h3>
+                        <p class="text-secondary mb-4">Bạn đang đăng ký <strong class="text-primary">2 seats</strong> trong tài khoản</p>
+                    <table class="seat-table">
+                        <thead>
+                            <tr>
+                                <th>Người dùng</th>
+                                <th>Số lượng seat</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Hoàng Anh</td>
+                                <td>1 seat</td>
+                                <td>
+                                    <div class="seat-actions">
+                                        <button class="btn btn-sm btn-secondary" onclick="removeUser('hoang-anh')">Xóa người dùng</button>
+                                        <button class="btn btn-sm btn-outline" onclick="removeSeat('hoang-anh')">Xóa seat</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Seat trống</td>
+                                <td>1 seat</td>
+                                <td>
+                                    <div class="seat-actions">
+                                        <button class="btn btn-sm btn-primary" onclick="assignUser('empty-1')">Gán người dùng</button>
+                                        <button class="btn btn-sm btn-outline" onclick="removeSeat('empty-1')">Xóa seat</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary mt-3" onclick="showAddSeat()" style="border-radius: var(--radius-md); padding: 0.625rem 1.25rem;">Thêm seat</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column: Invoice -->
+            <div class="col-md-4">
+                <!-- Renew Invoice (Auto Charge) -->
+                <div class="invoice-card" id="invoice-renew-auto" style="position: sticky; top: 100px;">
+                    <div class="invoice-title mb-3">Gia hạn gói Basic</div>
+                    <div class="invoice-details">
+                        <div class="invoice-details-item">
+                            <span class="invoice-details-item-label">Phí</span>
+                            <span class="invoice-details-item-value">$20</span>
+                        </div>
+                        <div class="invoice-details-item">
+                            <span class="invoice-details-item-label">Thanh toán</span>
+                            <span class="invoice-details-item-value">TT tự động</span>
+                        </div>
+                        <div class="invoice-details-item">
+                            <span class="invoice-details-item-label">Trạng thái</span>
+                            <span class="invoice-details-item-value">Mới</span>
+                        </div>
+                    </div>
+                    <div class="mt-3 pt-3 border-top">
+                        <div class="alert" style="background: #fef3c7; border: 1px solid #fde68a; color: #92400e; padding: 0.75rem; border-radius: var(--radius-md); font-size: 13px; margin-bottom: 1rem;">
+                            <strong>💳</strong> Sẽ tự động thanh toán vào ngày <strong>15/10</strong> bằng thẻ <strong>*****004</strong>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary w-100" onclick="stopSubscription()" style="border-radius: var(--radius-md); padding: 0.75rem;">
+                        Ngừng đăng ký
+                    </button>
+                </div>
+                
+                <!-- Renew Invoice (No Auto Charge) -->
+                <div class="invoice-card d-none" id="invoice-renew-manual" style="position: sticky; top: 100px;">
+                    <div class="invoice-title mb-3">Gia hạn gói Basic</div>
+                    <div class="invoice-details">
+                        <div class="invoice-details-item">
+                            <span class="invoice-details-item-label">Phí</span>
+                            <span class="invoice-details-item-value">$20</span>
+                        </div>
+                        <div class="invoice-details-item">
+                            <span class="invoice-details-item-label">Thanh toán</span>
+                            <span class="invoice-details-item-value">TT tự động</span>
+                        </div>
+                        <div class="invoice-details-item">
+                            <span class="invoice-details-item-label">Trạng thái</span>
+                            <span class="invoice-details-item-value">Mới</span>
+                        </div>
+                    </div>
+                    <div class="mt-3 pt-3 border-top">
+                        <div class="alert" style="background: #dbeafe; border: 1px solid #93c5fd; color: #1e40af; padding: 0.75rem; border-radius: var(--radius-md); font-size: 13px; margin-bottom: 1rem;">
+                            <strong>ℹ️</strong> Nhấn nút bên dưới để thanh toán
+                        </div>
+                    </div>
+                    <button class="btn btn-primary w-100" onclick="goToPayment()" style="border-radius: var(--radius-md); padding: 0.75rem;">
+                        Thanh toán
+                    </button>
+                </div>
+                
+                <!-- Error Message -->
+                <div class="invoice-card d-none" id="invoice-error" style="position: sticky; top: 100px;">
+                    <div class="alert alert-error mb-3" style="border-radius: var(--radius-md);">
+                        <strong>⚠️ Lỗi</strong> (Thanh toán lần cuối thất bại). Nếu vẫn chưa được thì nhấn nút bên dưới để thanh toán lại.
+                    </div>
+                    <button class="btn btn-primary w-100" onclick="goToPayment()" style="border-radius: var(--radius-md); padding: 0.75rem;">
+                        Thanh toán lại
+                    </button>
+                </div>
+                
+                <!-- Direct Payment Link -->
+                <div class="mt-3">
+                    <button class="btn btn-outline w-100" onclick="goToPaymentDirect()">
+                        Vào trang thanh toán
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const action = urlParams.get('action');
+        const autoCharge = urlParams.get('auto') !== 'false';
+        
+        function init() {
+            // Show appropriate sections based on action
+            if (action === 'change-plan') {
+                document.getElementById('change-plan-section').classList.remove('d-none');
+                document.getElementById('account-active-section').classList.remove('d-none');
+                document.getElementById('account-ended-section').classList.add('d-none');
+                document.getElementById('seat-section').classList.remove('d-none');
+                document.getElementById('payment-methods-section').classList.remove('d-none');
+            } else if (action === 'add-seat') {
+                document.getElementById('add-seat-section').classList.remove('d-none');
+                document.getElementById('account-active-section').classList.remove('d-none');
+                document.getElementById('seat-section').classList.add('d-none');
+                document.getElementById('payment-methods-section').classList.remove('d-none');
+            } else if (action === 'renew') {
+                document.getElementById('account-ended-section').classList.remove('d-none');
+                document.getElementById('account-active-section').classList.add('d-none');
+            } else {
+                document.getElementById('account-active-section').classList.remove('d-none');
+                document.getElementById('account-ended-section').classList.add('d-none');
+                document.getElementById('payment-methods-section').classList.remove('d-none');
+            }
+            
+            // Show appropriate invoice
+            if (autoCharge) {
+                document.getElementById('invoice-renew-auto').classList.remove('d-none');
+                document.getElementById('invoice-renew-manual').classList.add('d-none');
+                document.getElementById('page-title').textContent = 'Gia hạn gói: Thanh toán tự động';
+            } else {
+                document.getElementById('invoice-renew-auto').classList.add('d-none');
+                document.getElementById('invoice-renew-manual').classList.remove('d-none');
+                document.getElementById('page-title').textContent = 'Gia hạn gói: Thanh toán thủ công';
+            }
+        }
+        
+        function selectPlan(plan, action) {
+            if (action === 'change') {
+                window.location.href = `checkout.html?plan=${plan}&action=change`;
+            } else {
+                window.location.href = `checkout.html?plan=${plan}`;
+            }
+        }
+        
+        function changePlan() {
+            document.getElementById('change-plan-section').classList.remove('d-none');
+            document.getElementById('seat-section').classList.add('d-none');
+        }
+        
+        function showAddSeat() {
+            document.getElementById('add-seat-section').classList.remove('d-none');
+            document.getElementById('seat-section').classList.add('d-none');
+        }
+        
+        function continueToCheckout() {
+            window.location.href = 'checkout.html?action=add-seat';
+        }
+        
+        function stopSubscription() {
+            if (confirm('Bạn có chắc muốn ngừng đăng ký?')) {
+                alert('Đã ngừng đăng ký');
+            }
+        }
+        
+        function cancelSubscription() {
+            if (confirm('Bạn có chắc muốn hủy đăng ký?')) {
+                alert('Đã hủy đăng ký');
+            }
+        }
+        
+        function goToPayment() {
+            window.location.href = 'payment.html';
+        }
+        
+        function goToPaymentDirect() {
+            window.location.href = 'payment.html?invoice=direct';
+        }
+        
+        function removeUser(userId) {
+            if (confirm('Bạn có chắc muốn xóa user này?')) {
+                alert('Đã xóa user');
+            }
+        }
+        
+        function removeSeat(seatId) {
+            if (confirm('Bạn có chắc muốn xóa seat này?')) {
+                alert('Đã xóa seat');
+            }
+        }
+        
+        function assignUser(seatId) {
+            const userName = prompt('Nhập tên user:');
+            if (userName) {
+                alert(`Đã gán user ${userName} vào seat`);
+            }
+        }
+        
+        // Payment method toggle
+        document.querySelectorAll('input[name="paymentMethodType"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const formChecks = document.querySelectorAll('.form-check');
+                formChecks.forEach(el => {
+                    const input = el.querySelector('input[type="radio"]');
+                    if (input.checked) {
+                        el.style.borderColor = 'var(--primary)';
+                        el.style.backgroundColor = 'rgba(37, 99, 235, 0.05)';
+                    } else {
+                        el.style.borderColor = 'var(--border)';
+                        el.style.backgroundColor = 'transparent';
+                    }
+                });
+                
+                // Show/hide card form
+                if (this.value === 'card') {
+                    document.getElementById('card-form-section').style.display = 'block';
+                } else {
+                    document.getElementById('card-form-section').style.display = 'none';
+                }
+            });
+        });
+        
+        init();
+    </script>
+</body>
+</html>
+

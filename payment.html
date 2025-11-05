@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán - HKSpace SaaS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="custom.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="landing-page.html" class="navbar-brand">HKSpace</a>
+            <ul class="navbar-nav">
+                <li><a href="landing-page.html">Bảng giá</a></li>
+                <li><a href="subscription.html">Gói đăng ký</a></li>
+                <li><a href="checkout.html">Thanh toán</a></li>
+                <li><a href="payment.html" class="active">Cổng thanh toán</a></li>
+            </ul>
+        </div>
+    </nav>
+    <style>
+        .payment-sidebar {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+        }
+        .payment-sidebar-item {
+            padding: 0.875rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+            font-weight: 500;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+        }
+        .payment-sidebar-item:hover {
+            background: var(--bg-secondary);
+            border-color: var(--primary);
+        }
+        .payment-sidebar-item.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .card-preview {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            color: white;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .security-badges {
+            display: flex;
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+        .security-badge {
+            background: var(--success);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <!-- Left Sidebar: Payment Methods -->
+            <div class="col-md-3">
+                <div class="payment-sidebar">
+                    <div class="payment-sidebar-item active">
+                        Thẻ ghi nợ nội địa (ATM)
+                    </div>
+                    <div class="payment-sidebar-item">
+                        Thẻ quốc tế (Visa/Master/JCB)
+                    </div>
+                    <div class="payment-sidebar-item">
+                        QR Code
+                    </div>
+                    <div class="payment-sidebar-item">
+                        Chuyển khoản
+                    </div>
+                    <div class="payment-sidebar-item">
+                        Ví điện tử
+                    </div>
+                    <div class="payment-sidebar-item">
+                        Trả góp
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Center: Payment Form -->
+            <div class="col-md-6">
+                <h2 class="fw-bold mb-4">Thanh toán bằng Thẻ ghi nợ nội địa (ATM)</h2>
+                
+                <div class="security-badges">
+                    <span class="security-badge">Bảo mật</span>
+                    <span class="security-badge">PCI DSS</span>
+                </div>
+                
+                <!-- Card Preview -->
+                <div class="card-preview">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <img src="https://via.placeholder.com/60x40?text=ACB" alt="Bank Logo" style="background: white; padding: 5px; border-radius: 4px;">
+                        </div>
+                        <div class="text-end">
+                            <small>Ngày Hiệu Lực: MM-YY</small>
+                        </div>
+                    </div>
+                    <div class="card-number" id="card-number-display">9704 16xx xxxx 0150</div>
+                    <div class="card-details">
+                        <div>
+                            <small>Chủ thẻ</small>
+                            <div class="fw-bold" id="cardholder-display">DANG THỊ THANH MAI</div>
+                        </div>
+                        <div class="text-end">
+                            <small>Ngày hết hạn</small>
+                            <div class="fw-bold" id="expiry-display">MM-YY</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="text-muted mb-4">
+                    Số thẻ ATM bao gồm 16 hoặc 19 chữ số, bắt đầu với 9704.
+                </p>
+                
+                <!-- Payment Form -->
+                <form id="payment-form">
+                    <div class="mb-3">
+                        <label for="cardholder-name" class="form-label fw-bold">
+                            Họ tên chủ thẻ *
+                        </label>
+                        <input 
+                            type="text" 
+                            class="form-input" 
+                            id="cardholder-name" 
+                            placeholder="DANG THỊ THANH MAI"
+                            value="DANG THỊ THANH MAI"
+                            required
+                            oninput="updateCardPreview()"
+                        >
+                        <div class="form-hint">(Tên ghi trên thẻ)</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="card-number" class="form-label fw-bold">
+                            Số thẻ *
+                        </label>
+                        <input 
+                            type="text" 
+                            class="form-input" 
+                            id="card-number" 
+                            placeholder="9704162301020150"
+                            value="9704162301020150"
+                            maxlength="19"
+                            required
+                            oninput="updateCardPreview()"
+                        >
+                        <div class="form-hint">(Gồm 16 hoặc 19 ký tự)</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="expiry-date" class="form-label fw-bold">
+                            Ngày hiệu lực *
+                        </label>
+                        <input 
+                            type="text" 
+                            class="form-input" 
+                            id="expiry-date" 
+                            placeholder="MM-YY"
+                            maxlength="5" 
+                            oninput="updateCardPreview()"
+                        >
+                        <div class="form-hint">(Ví dụ: 03-07)</div>
+                    </div>
+                    
+                    <div class="d-flex gap-2 mb-4">
+                        <button type="button" class="btn btn-secondary flex-fill" onclick="cancelPayment()">
+                            Hủy
+                        </button>
+                        <button type="submit" class="btn btn-success flex-fill">
+                            Tiếp tục
+                        </button>
+                    </div>
+                    
+                    <div class="order-timer">
+                        Đơn hàng sẽ hết hạn trong vòng <span id="timer">20:16</span>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <a href="#" class="text-decoration-none">Danh sách ngân hàng hỗ trợ</a>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Right Sidebar: Order Summary -->
+            <div class="col-md-3">
+                <div class="account-info-section">
+                    <h5 class="fw-bold mb-3">Thông tin đơn hàng</h5>
+                    <div class="mb-2">
+                        <strong>Đơn vị cung cấp:</strong><br>
+                        <span>Firzen Le</span>
+                    </div>
+                    <div class="mb-2">
+                        <strong>Mã đơn hàng:</strong><br>
+                        <span>don_hang_CTT_new_1047</span>
+                    </div>
+                    <div class="mb-2">
+                        <strong>Giá trị đơn hàng:</strong><br>
+                        <span>10.000 VND</span>
+                    </div>
+                    <div class="mb-2">
+                        <strong>Phí dịch vụ:</strong><br>
+                        <span>1,870 VND</span>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Tổng thanh toán:</strong><br>
+                        <span class="fw-bold text-danger fs-5">11.870 VND</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function updateCardPreview() {
+            const cardNumber = document.getElementById('card-number').value;
+            const cardholder = document.getElementById('cardholder-name').value.toUpperCase();
+            const expiry = document.getElementById('expiry-date').value;
+            
+            // Format card number for display
+            let formatted = cardNumber.replace(/\s/g, '');
+            if (formatted.length > 4) {
+                formatted = formatted.substring(0, 4) + ' ' + 
+                           formatted.substring(4, 6) + 'xx xxxx ' + 
+                           formatted.substring(formatted.length - 4);
+            }
+            document.getElementById('card-number-display').textContent = formatted || '9704 16xx xxxx 0150';
+            
+            document.getElementById('cardholder-display').textContent = cardholder || 'DANG THỊ THANH MAI';
+            document.getElementById('expiry-display').textContent = expiry || 'MM-YY';
+        }
+        
+        function cancelPayment() {
+            if (confirm('Bạn có chắc muốn hủy thanh toán?')) {
+                window.location.href = 'checkout.html';
+            }
+        }
+        
+        // Timer countdown
+        let timeLeft = 20 * 60 + 16; // 20:16 in seconds
+        const timerElement = document.getElementById('timer');
+        
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateTimer, 1000);
+            } else {
+                alert('Đơn hàng đã hết hạn!');
+            }
+        }
+        
+        updateTimer();
+        
+        // Form submission
+        document.getElementById('payment-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Simulate payment processing
+            alert('Đang xử lý thanh toán...');
+            // Redirect to payment result page
+            setTimeout(() => {
+                window.location.href = 'subscription.html?payment=success';
+            }, 2000);
+        });
+        
+        // Payment method selection
+        document.querySelectorAll('.payment-sidebar-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.payment-sidebar-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
+

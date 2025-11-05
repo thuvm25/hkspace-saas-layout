@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đổi gói - Thanh toán - HKSpace SaaS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="custom.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="landing-page.html" class="navbar-brand">HKSpace</a>
+            <ul class="navbar-nav">
+                <li><a href="landing-page.html">Bảng giá</a></li>
+                <li><a href="subscription.html">Gói đăng ký</a></li>
+                <li><a href="checkout.html" class="active">Thanh toán</a></li>
+                <li><a href="payment.html">Cổng thanh toán</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <!-- Left Section: Instructions -->
+            <div class="col-md-3">
+                <h5 class="fw-bold mb-3">Quy trình đổi gói</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2">• Qua trang thông tin tài khoản + thanh toán</li>
+                    <li class="mb-2 ps-3">• Tên doanh nghiệp/cá nhân</li>
+                    <li class="mb-2 ps-3">• Thông tin thanh toán</li>
+                    <li class="mb-2">• Bên phải có thông tin của invoice</li>
+                    <li class="mb-2 ps-3">• Mô tả: Bạn đăng ký gói "Basic" dùng thử trong 15...</li>
+                    <li class="mb-2 ps-3">• Thông tin phí chi</li>
+                    <li class="mb-2">• Nhấn nút "Thanh toán"</li>
+                </ul>
+            </div>
+            
+            <!-- Middle Section: Forms -->
+            <div class="col-md-6">
+                <h2 class="fw-bold mb-4">Thông tin đổi gói</h2>
+                
+                <!-- Account Information -->
+                <div class="form-section">
+                    <h4 class="form-section-title">Tài khoản</h4>
+                    <input type="text" class="form-input" placeholder="Tên" required>
+                    <input type="email" class="form-input" placeholder="Email (tài khoản)" required>
+                    <input type="password" class="form-input" placeholder="Password (tài khoản)" required>
+                </div>
+                
+                <!-- Business/Individual Information -->
+                <div class="form-section">
+                    <h4 class="form-section-title">TT doanh nghiệp/cá nhân</h4>
+                    <input type="text" class="form-input" placeholder="Tên công ty/Cá nhân" required>
+                    <input type="text" class="form-input" placeholder="Địa chỉ/Tỉnh thành" required>
+                </div>
+                
+                <!-- Payment Methods -->
+                <div class="form-section">
+                    <h4 class="form-section-title">Thanh toán</h4>
+                    <div class="payment-methods">
+                        <button class="payment-method-btn active" onclick="selectPaymentMethod('bank')">
+                            Chuyển khoản/ Momo
+                        </button>
+                        <button class="payment-method-btn" onclick="selectPaymentMethod('card')">
+                            Visa/Thẻ
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Checkout Button -->
+                <button class="btn btn-primary w-100 py-3 mb-4" onclick="processCheckout()">
+                    Thanh toán
+                </button>
+            </div>
+            
+            <!-- Right Section: ChangePlanInvoice -->
+            <div class="col-md-3">
+                <div class="invoice-card">
+                    <div class="invoice-title">Hóa đơn đổi gói</div>
+                    
+                    <div class="invoice-details mb-3">
+                        <div class="fw-bold">Đổi gói:</div>
+                        <div>Đổi từ gói Basic sang gói Advanced</div>
+                    </div>
+                    
+                    <div class="mt-3 pt-3 border-top"></div>
+                    
+                    <div class="invoice-details mb-3">
+                        <div class="fw-bold mb-2">Ngày còn lại của gói cũ:</div>
+                        <div class="invoice-details-item">
+                            <span class="invoice-details-item-label">Đơn giá</span>
+                            <span class="invoice-details-item-value">$15/thành viên/tháng</span>
+                        </div>
+                        <div class="invoice-details-item">
+                            <span class="invoice-details-item-label">Chênh lệch</span>
+                            <span class="invoice-details-item-value">$15.05</span>
+                        </div>
+                        <div class="invoice-details-item">
+                            <span class="invoice-details-item-label">Thời hạn</span>
+                            <span class="invoice-details-item-value">15/10</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3 pt-3 border-top"></div>
+                    
+                    <div class="invoice-details">
+                        <div class="invoice-total">
+                            <span class="invoice-total-label">Tổng</span>
+                            <span class="invoice-total-value">$15.05</span>
+                        </div>
+                        <div class="mt-3">
+                            <small class="text-secondary">Cho gói Advanced trong 15 ngày còn lại của kỳ hiện tại</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function selectPaymentMethod(method) {
+            document.querySelectorAll('.payment-method-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+        
+        function processCheckout() {
+            window.location.href = 'payment.html?action=change-plan';
+        }
+    </script>
+</body>
+</html>
+

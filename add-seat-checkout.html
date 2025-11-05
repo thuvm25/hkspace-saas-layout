@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm Seat - Thanh toán - HKSpace SaaS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="custom.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="landing-page.html" class="navbar-brand">HKSpace</a>
+            <ul class="navbar-nav">
+                <li><a href="landing-page.html">Bảng giá</a></li>
+                <li><a href="subscription.html">Gói đăng ký</a></li>
+                <li><a href="checkout.html" class="active">Thanh toán</a></li>
+                <li><a href="payment.html">Cổng thanh toán</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5 mb-5">
+        <div class="row g-4">
+            <!-- Left Section: Current Plan -->
+            <div class="col-lg-4">
+                <div class="card" style="border: none; box-shadow: var(--shadow-md);">
+                    <div class="card-body p-4">
+                        <h3 class="fw-bold mb-4">Gói hiện tại</h3>
+                        
+                        <div class="mb-4">
+                            <div class="d-flex align-items-center mb-2">
+                                <h4 class="mb-0">Gói của bạn là <strong>Basic</strong></h4>
+                            </div>
+                            <p class="text-secondary mb-3">Giải pháp phù hợp cho các team bắt đầu</p>
+                            
+                            <div class="mb-3">
+                                <span class="text-secondary">Hoạt động đến</span>
+                                <span class="fw-bold ms-2">15/10/2025</span>
+                            </div>
+                            <p class="text-secondary small mb-3">
+                                Chúng tôi sẽ gửi thông báo khi gói đăng ký sắp hết hạn
+                            </p>
+                            
+                            <div class="d-flex align-items-baseline gap-2 mb-2">
+                                <span class="h4 fw-bold mb-0">$15</span>
+                                <span class="text-secondary">/thành viên/tháng</span>
+                                <span class="badge" style="background: var(--primary); color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 11px;">Phổ biến</span>
+                            </div>
+                            <p class="text-secondary small">Gói tiêu chuẩn cho các doanh nghiệp nhỏ và vừa</p>
+                        </div>
+                        
+                        <div class="mt-4 pt-3 border-top">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="text-secondary small">Seats hiện tại</span>
+                                <span class="fw-bold" id="current-seats">2</span>
+                            </div>
+                            <div class="progress mb-2" style="height: 8px; background: var(--bg-tertiary);">
+                                <div class="progress-bar" role="progressbar" style="width: 20%; background: var(--primary);" id="seats-progress"></div>
+                            </div>
+                            <p class="text-secondary small mb-0">
+                                <span id="remaining-seats">18</span> seats còn lại trong gói
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Middle Section: Add Seat Form -->
+            <div class="col-lg-5">
+                <div class="card" style="border: none; box-shadow: var(--shadow-md);">
+                    <div class="card-body p-4">
+                        <h3 class="fw-bold mb-4">Thêm seat</h3>
+                        
+                        <!-- Seat Quantity Selector -->
+                        <div class="form-section mb-4">
+                            <label class="form-label fw-bold mb-3">Số lượng seat muốn thêm</label>
+                            <div class="d-flex align-items-center gap-3">
+                                <button class="btn btn-outline-secondary" style="width: 40px; height: 40px; border-radius: 8px;" onclick="changeSeatQuantity(-1)">
+                                    <span>-</span>
+                                </button>
+                                <input type="number" class="form-control text-center fw-bold" id="seat-quantity" value="3" min="1" max="18" style="width: 80px; height: 40px; border-radius: 8px; border: 2px solid var(--border);" onchange="updateInvoice()">
+                                <button class="btn btn-outline-secondary" style="width: 40px; height: 40px; border-radius: 8px;" onclick="changeSeatQuantity(1)">
+                                    <span>+</span>
+                                </button>
+                                <span class="text-secondary ms-2">seats</span>
+                            </div>
+                            <small class="text-secondary mt-2 d-block">Tối đa 18 seats có thể thêm</small>
+                        </div>
+                        
+                        <!-- Payment Methods -->
+                        <div class="form-section">
+                            <label class="form-label fw-bold mb-3">Phương thức thanh toán</label>
+                            <div class="payment-methods-radio">
+                                <div class="form-check mb-3" style="padding: 1rem; border: 2px solid var(--border); border-radius: var(--radius-md); cursor: pointer; transition: all 0.2s;" 
+                                     onmouseover="this.style.borderColor='var(--primary)'" 
+                                     onmouseout="if(!this.querySelector('input').checked) this.style.borderColor='var(--border)'">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="paymentCard" value="card" checked 
+                                           onchange="updatePaymentMethod('card')" style="margin-top: 0.5rem;">
+                                    <label class="form-check-label w-100" for="paymentCard" style="cursor: pointer;">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <strong>Thẻ ghi nợ/Tín dụng/ATM</strong>
+                                                <div class="text-secondary small mt-1">Visa, Mastercard, JCB</div>
+                                            </div>
+                                            <div class="d-flex gap-2">
+                                                <span style="font-size: 24px;">💳</span>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check" style="padding: 1rem; border: 2px solid var(--border); border-radius: var(--radius-md); cursor: pointer; transition: all 0.2s;"
+                                     onmouseover="this.style.borderColor='var(--primary)'" 
+                                     onmouseout="if(!this.querySelector('input').checked) this.style.borderColor='var(--border)'">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="paymentBank" value="bank"
+                                           onchange="updatePaymentMethod('bank')" style="margin-top: 0.5rem;">
+                                    <label class="form-check-label w-100" for="paymentBank" style="cursor: pointer;">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <strong>Chuyển khoản / Ví điện tử</strong>
+                                                <div class="text-secondary small mt-1">Banking, Momo, ZaloPay</div>
+                                            </div>
+                                            <div class="d-flex gap-2">
+                                                <span style="font-size: 24px;">🏦</span>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Checkout Button -->
+                        <button class="btn btn-primary w-100 py-3 mt-4" style="border-radius: var(--radius-md); font-weight: 600;" onclick="processCheckout()">
+                            Tiếp tục thanh toán
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Section: Invoice Summary -->
+            <div class="col-lg-3">
+                <div class="invoice-card" style="position: sticky; top: 100px;">
+                    <div class="invoice-title mb-3">Tóm tắt đơn hàng</div>
+                    
+                    <div class="invoice-details mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-secondary">Gói</span>
+                            <span class="fw-bold">Basic</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-secondary">Thêm seats</span>
+                            <span class="fw-bold" id="invoice-seat-quantity">3</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3 pt-3 border-top"></div>
+                    
+                    <div class="invoice-details">
+                        <div class="invoice-details-item">
+                            <span class="invoice-details-item-label">Đơn giá/seat</span>
+                            <span class="invoice-details-item-value">$10</span>
+                        </div>
+                        <div class="invoice-details-item">
+                            <span class="invoice-details-item-label">Đơn giá × seats</span>
+                            <span class="invoice-details-item-value" id="invoice-subtotal">$30</span>
+                        </div>
+                        <div class="invoice-details-item">
+                            <span class="invoice-details-item-label">Thời gian còn lại</span>
+                            <span class="invoice-details-item-value">15 ngày</span>
+                        </div>
+                        <div class="invoice-total mt-3">
+                            <span class="invoice-total-label">Tổng tiền</span>
+                            <span class="invoice-total-value" id="invoice-total">$15</span>
+                        </div>
+                        <div class="mt-3">
+                            <small class="text-secondary">Cho <span id="invoice-seats-text">3 seats</span> trong 15 ngày còn lại của kỳ hiện tại</small>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3 pt-3 border-top"></div>
+                    
+                    <div class="invoice-details mt-3">
+                        <div class="alert" style="background: #fef3c7; border: 1px solid #fde68a; color: #92400e; padding: 0.75rem; border-radius: var(--radius-md); font-size: 13px;">
+                            <strong>📝 Ghi chú:</strong> Đến kỳ tiếp theo sẽ thanh toán cho <span id="invoice-next-seats">5</span> seats
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let seatQuantity = 3;
+        const maxSeats = 18;
+        const currentSeats = 2;
+        const pricePerSeat = 10;
+        const remainingDays = 15;
+        
+        function changeSeatQuantity(delta) {
+            const newQuantity = Math.max(1, Math.min(maxSeats, seatQuantity + delta));
+            document.getElementById('seat-quantity').value = newQuantity;
+            seatQuantity = newQuantity;
+            updateInvoice();
+        }
+        
+        function updateInvoice() {
+            seatQuantity = parseInt(document.getElementById('seat-quantity').value) || 1;
+            
+            // Update quantity display
+            document.getElementById('invoice-seat-quantity').textContent = seatQuantity;
+            document.getElementById('invoice-seats-text').textContent = seatQuantity + ' seats';
+            
+            // Calculate prices
+            const subtotal = pricePerSeat * seatQuantity;
+            const total = Math.round((subtotal * remainingDays / 30) * 100) / 100;
+            const nextPeriodSeats = currentSeats + seatQuantity;
+            
+            // Update invoice values
+            document.getElementById('invoice-subtotal').textContent = '$' + subtotal;
+            document.getElementById('invoice-total').textContent = '$' + total.toFixed(2);
+            document.getElementById('invoice-next-seats').textContent = nextPeriodSeats;
+            
+            // Update progress bar
+            const totalSeats = currentSeats + seatQuantity;
+            const progressPercent = Math.min(100, (totalSeats / 20) * 100);
+            document.getElementById('seats-progress').style.width = progressPercent + '%';
+            document.getElementById('remaining-seats').textContent = Math.max(0, 20 - totalSeats);
+        }
+        
+        function updatePaymentMethod(method) {
+            // Update border color for selected payment method
+            document.querySelectorAll('.form-check').forEach(el => {
+                const input = el.querySelector('input[type="radio"]');
+                if (input.checked) {
+                    el.style.borderColor = 'var(--primary)';
+                    el.style.backgroundColor = 'rgba(37, 99, 235, 0.05)';
+                } else {
+                    el.style.borderColor = 'var(--border)';
+                    el.style.backgroundColor = 'transparent';
+                }
+            });
+        }
+        
+        function processCheckout() {
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            window.location.href = `payment.html?action=add-seat&seats=${seatQuantity}&method=${paymentMethod}`;
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateInvoice();
+            updatePaymentMethod();
+            
+            // Watch for input changes
+            document.getElementById('seat-quantity').addEventListener('input', function() {
+                const value = parseInt(this.value) || 1;
+                if (value < 1) this.value = 1;
+                if (value > maxSeats) this.value = maxSeats;
+                seatQuantity = parseInt(this.value);
+                updateInvoice();
+            });
+        });
+    </script>
+    <style>
+        .form-check input[type="radio"]:checked ~ label {
+            color: var(--primary);
+        }
+        
+        .form-check input[type="radio"]:checked {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .form-check:hover {
+            border-color: var(--primary) !important;
+        }
+        
+        .progress {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+    </style>
+</body>
+</html>
+
