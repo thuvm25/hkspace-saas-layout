@@ -1,174 +1,512 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HKSpace SaaS - Pricing Plans</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="custom.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HKSpace SaaS - Giải pháp quản lý không gian làm việc</title>
+
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- AOS animation -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #007bff;
+      --secondary: #6c757d;
+      --bg-light: #f8f9fa;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fff;
+      color: #333;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .navbar-nav a {
+      color: #555;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.3s;
+    }
+
+    .navbar-nav a:hover,
+    .navbar-nav a.active {
+      background-color: var(--primary);
+      color: #fff !important;
+    }
+
+    /* Hero Section */
+    .hero {
+        background: linear-gradient(135deg, #f7f9ff 0%, #e8f0ff 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero .floating-img {
+        max-width: 90%;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    .hero-bg {
+        position: absolute;
+        top: -100px;
+        left: -100px;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle at center, rgba(0,123,255,0.15), transparent 70%);
+        border-radius: 50%;
+        animation: pulse 8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 0.5; }
+        50% { transform: scale(1.3); opacity: 0.2; }
+    }
+
+    /* Pricing */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .pricing-card {
+      background: white;
+      border: 1px solid #e5e5e5;
+      border-radius: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: transform .3s, box-shadow .3s;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .pricing-card.featured {
+      border: 2px solid var(--primary);
+      position: relative;
+    }
+
+    .pricing-card.featured::before {
+      content: "Phổ biến nhất";
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: #fff;
+      padding: 4px 12px;
+      font-size: 0.8rem;
+      border-radius: 8px;
+    }
+
+    .pricing-card-title {
+      font-weight: 600;
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+    }
+
+    .pricing-card-price-amount {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .pricing-card-price-period {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .pricing-card-features {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+      text-align: left;
+    }
+
+    .pricing-card-features li {
+      padding: 6px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .pricing-card-btn {
+      border-radius: 8px;
+      padding: 10px 20px;
+    }
+
+    /* Toggle */
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 26px;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ddd;
+      transition: .4s;
+      border-radius: 26px;
+    }
+
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    .toggle-switch input:checked + .toggle-slider {
+      background-color: var(--primary);
+    }
+
+    .toggle-switch input:checked + .toggle-slider:before {
+      transform: translateX(24px);
+    }
+
+    /* Footer */
+    footer {
+      background-color: #f8f9fa;
+      text-align: center;
+      padding: 40px 0;
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Feature */
+    .card {
+        border-radius: 16px;
+        transition: transform .3s, box-shadow .3s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 123, 255, 0.15);
+    }
+
+    #features img {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    #features img:hover {
+        transform: scale(1.03);
+        box-shadow: 0 10px 20px rgba(0,123,255,0.15);
+    }
+
+    /* App */
+    #app {
+        background: linear-gradient(180deg, #f7f9ff 0%, #ffffff 100%);
+        position: relative;
+        z-index: 1;
+    }
+
+    #app .phone-mockup {
+        position: relative;
+    }
+
+    #app .bg-circle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 400px;
+        height: 400px;
+        transform: translate(-50%, -50%);
+        background: radial-gradient(circle at center, rgba(0,123,255,0.15), transparent 70%);
+        border-radius: 50%;
+        z-index: -1;
+        animation: pulse 6s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+        50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.3; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <a href="landing-page.html" class="navbar-brand">HKSpace</a>
-            <ul class="navbar-nav">
-                <li><a href="landing-page.html" class="active">Bảng giá</a></li>
-                <li><a href="subscription.html">Gói đăng ký</a></li>
-                <li><a href="checkout.html">Thanh toán</a></li>
-                <li><a href="payment.html">Cổng thanh toán</a></li>
-            </ul>
-        </div>
-    </nav>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="landing-page.html">HKSpace</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li><a href="landing-page.html" class="active">Bảng giá</a></li>
+          <li><a href="subscription.html">Gói đăng ký</a></li>
+          <li><a href="checkout.html">Thanh toán</a></li>
+          <li><a href="payment.html">Cổng thanh toán</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-    <!-- Hero Section -->
-    <section class="section">
-        <div class="container">
-            <h1 class="section-title">Công cụ hoàn chỉnh cho toàn bộ công ty của bạn.<br>Miễn phí cho các team dùng thử.</h1>
-            <p class="section-subtitle">Được tin dùng bởi các đội ngũ tại các công ty hàng đầu trên thế giới</p>
-            
-            <!-- Pricing Toggle -->
-            <div class="d-flex justify-content-center align-items-center gap-3 mb-5">
-                <span class="text-secondary">Thanh toán theo tháng</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="billingToggle" checked>
-                    <span class="toggle-slider"></span>
-                </label>
-                <span class="text-primary fw-bold">Thanh toán theo năm <span class="badge badge-info">Tiết kiệm đến 20%</span></span>
-            </div>
-            
-            <!-- Pricing Grid -->
-            <div class="pricing-grid">
-                <!-- Free Plan -->
-                <div class="pricing-card">
-                    <div class="card-header">
-                        <div class="pricing-card-title">Free</div>
-                        <div class="pricing-card-price">
-                            <span class="pricing-card-price-amount">$0</span>
-                            <div class="pricing-card-price-period">mỗi thành viên / tháng</div>
-                        </div>
-                        <p class="pricing-card-description">Dành cho cá nhân để tổ chức các dự án cá nhân và cuộc sống.</p>
-                    </div>
-                    <ul class="pricing-card-features">
-                        <li>Tối đa member: 5</li>
-                        <li>AI Basic: Không</li>
-                        <li>Hỗ trợ 24/7: Không</li>
-                        <li>Blocks: 100</li>
-                        <li>Dùng thử trọn đời</li>
-                    </ul>
-                    <button class="btn btn-secondary pricing-card-btn" onclick="assignPlan('free')">
-                        Đăng ký ngay
-                    </button>
-                </div>
-                
-                <!-- Basic Plan -->
-                <div class="pricing-card featured">
-                    <div class="card-header">
-                        <div class="pricing-card-title">Basic</div>
-                        <div class="pricing-card-price">
-                            <span class="pricing-card-price-amount" id="basic-price">$15</span>
-                            <div class="pricing-card-price-period">mỗi thành viên / tháng</div>
-                        </div>
-                        <p class="pricing-card-description">Dành cho các team bắt đầu với tính năng cộng tác.</p>
-                    </div>
-                    <ul class="pricing-card-features">
-                        <li>Tối đa member: 1,000</li>
-                        <li>AI Basic: Có</li>
-                        <li>Hỗ trợ 24/7: Có</li>
-                        <li>Blocks: Không giới hạn</li>
-                        <li>Dùng thử 15 ngày</li>
-                    </ul>
-                    <button class="btn btn-primary pricing-card-btn" onclick="assignPlan('basic')">
-                        Bắt đầu ngay
-                    </button>
-                </div>
-                
-                <!-- Advanced Plan -->
-                <div class="pricing-card">
-                    <div class="card-header">
-                        <div class="pricing-card-title">Advanced</div>
-                        <div class="pricing-card-price">
-                            <span class="pricing-card-price-amount" id="advanced-price">$23</span>
-                            <div class="pricing-card-price-period">mỗi thành viên / tháng</div>
-                        </div>
-                        <p class="pricing-card-description">Dành cho các công ty cần tính năng nâng cao và bảo mật.</p>
-                    </div>
-                    <ul class="pricing-card-features">
-                        <li>Tối đa member: Không giới hạn</li>
-                        <li>AI Basic: Có</li>
-                        <li>Hỗ trợ 24/7: Có</li>
-                        <li>Blocks: Không giới hạn</li>
-                        <li>Dùng thử 15 ngày</li>
-                    </ul>
-                    <button class="btn btn-primary pricing-card-btn" onclick="assignPlan('advanced')">
-                        Bắt đầu ngay
-                    </button>
-                </div>
-            </div>
+  <!-- Hero Section -->
+  <section class="hero position-relative overflow-hidden">
+    <div class="container py-5 text-center text-lg-start">
+      <div class="row align-items-center">
+        <div class="col-lg-6" data-aos="fade-right">
+          <h1 class="fw-bold display-5 mb-3">
+            Giải pháp SaaS quản lý không gian làm việc thông minh
+          </h1>
+          <p class="text-secondary mb-4">
+            HKSpace giúp doanh nghiệp quản lý công việc, phòng ban, và nhân sự chỉ trong một nền tảng — nhanh hơn, linh hoạt hơn và thông minh hơn.
+          </p>
+          <div class="d-flex gap-3 justify-content-center justify-content-lg-start">
+            <a href="#pricing" class="btn btn-primary btn-lg">Dùng thử miễn phí</a>
+            <a href="#features" class="btn btn-outline-primary btn-lg">Xem tính năng</a>
+          </div>
         </div>
-    </section>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function assignPlan(plan) {
-            window.location.href = `checkout.html?plan=${plan}`;
-        }
-        
-        // Billing toggle
-        document.getElementById('billingToggle').addEventListener('change', function(e) {
-            const isYearly = e.target.checked;
-            const basicPrice = document.getElementById('basic-price');
-            const advancedPrice = document.getElementById('advanced-price');
-            
-            if (isYearly) {
-                basicPrice.textContent = '$12';
-                advancedPrice.textContent = '$18';
-            } else {
-                basicPrice.textContent = '$15';
-                advancedPrice.textContent = '$23';
-            }
-        });
-    </script>
-    <style>
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 26px;
-        }
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        .toggle-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: var(--border);
-            transition: .4s;
-            border-radius: 26px;
-        }
-        .toggle-slider:before {
-            position: absolute;
-            content: "";
-            height: 20px;
-            width: 20px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-        .toggle-switch input:checked + .toggle-slider {
-            background-color: var(--primary);
-        }
-        .toggle-switch input:checked + .toggle-slider:before {
-            transform: translateX(24px);
-        }
-    </style>
+        <div class="col-lg-6 text-center mt-5 mt-lg-0" data-aos="fade-left">
+          <img src="Image/Dashboard.png" alt="HKSpace Dashboard Preview" class="img-fluid floating-img">
+        </div>
+      </div>
+    </div>
+  
+    <div class="hero-bg"></div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-5 bg-light" id="features" data-aos="fade-up">
+    <div class="container text-center">
+      <h2 class="fw-bold mb-3">Tính năng nổi bật của HKSpace</h2>
+      <p class="text-secondary mb-5">Tối ưu hóa không gian làm việc của bạn với nền tảng mạnh mẽ và dễ dùng</p>
+  
+      <div class="row g-4">
+        <!-- Feature 1 -->
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card border-0 h-100 shadow-sm py-4 px-3">
+            <div class="text-primary fs-1 mb-3">
+              <i class="bi bi-building-check"></i>
+            </div>
+            <h5 class="fw-bold">Quản lý không gian thông minh</h5>
+            <p class="text-secondary">
+              Theo dõi phòng họp, bàn làm việc và khu vực dùng chung một cách trực quan. 
+              Dễ dàng kiểm soát lịch đặt chỗ và tối ưu hiệu suất sử dụng.
+            </p>
+          </div>
+        </div>
+  
+        <!-- Feature 2 -->
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+          <div class="card border-0 h-100 shadow-sm py-4 px-3">
+            <div class="text-primary fs-1 mb-3">
+              <i class="bi bi-cpu"></i>
+            </div>
+            <h5 class="fw-bold">Tích hợp AI thông minh</h5>
+            <p class="text-secondary">
+              HKSpace được tích hợp trợ lý AI giúp gợi ý công việc, hỗ trợ lập kế hoạch và trò chuyện trực tiếp 
+              ngay trong dashboard. Làm việc hiệu quả hơn cùng “đồng đội ảo” của bạn.
+            </p>
+          </div>
+        </div>
+  
+        <!-- Feature 3 -->
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+          <div class="card border-0 h-100 shadow-sm py-4 px-3">
+            <div class="text-primary fs-1 mb-3">
+              <i class="bi bi-phone"></i>
+            </div>
+            <h5 class="fw-bold">Ứng dụng di động tiện lợi</h5>
+            <p class="text-secondary">
+              Quản lý không gian của bạn mọi lúc mọi nơi với app HKSpace Mobile. 
+              Xem công việc và nhận thông báo chỉ bằng một chạm.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>  
+
+  <!-- Mobile App Section -->
+  <section class="py-5 position-relative overflow-hidden" id="app" data-aos="fade-up">
+    <div class="container text-center">
+      <h2 class="fw-bold mb-3">Ứng dụng di động HKSpace</h2>
+      <p class="text-secondary mb-5">
+        Quản lý công việc, đặt chỗ và cộng tác mọi lúc mọi nơi với HKSpace Mobile – có mặt trên iOS và Android.
+      </p>
+  
+      <div class="row align-items-center justify-content-center">
+        <!-- Text -->
+        <div class="col-lg-5 mb-4 mb-lg-0 text-start" data-aos="fade-right">
+          <h4 class="fw-bold mb-3">Trải nghiệm linh hoạt và mượt mà</h4>
+          <p class="text-secondary mb-4">
+            Giao diện tối giản, tốc độ nhanh, tích hợp AI hỗ trợ lịch làm việc và gợi ý thông minh.  
+            Bạn có thể theo dõi trạng thái không gian, nhận thông báo, và chia sẻ tài nguyên ngay trong app.
+          </p>
+          <div class="d-flex gap-3">
+            <a href="#" class="btn btn-dark d-flex align-items-center gap-2">
+              <i class="bi bi-apple"></i> App Store
+            </a>
+            <a href="#" class="btn btn-success d-flex align-items-center gap-2">
+              <i class="bi bi-google-play"></i> Google Play
+            </a>
+          </div>
+        </div>
+  
+        <!-- Image -->
+        <div class="col-lg-5 text-center" data-aos="fade-left">
+          <div class="phone-mockup position-relative">
+            <img src="Image/Login.jpg" alt="HKSpace App Preview" class="img-fluid shadow-lg rounded-4 border border-light" style="max-height: 520px;">
+            <img src="Image/Home.jpg" alt="HKSpace App Preview" class="img-fluid shadow-lg rounded-4 border border-light" style="max-height: 520px;">
+            <div class="bg-circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>  
+
+  <!-- Pricing Section -->
+  <section class="py-5" id="pricing" data-aos="fade-up">
+    <div class="container">
+      <h2 class="text-center fw-bold mb-3">Bảng giá HKSpace</h2>
+      <p class="text-center text-secondary mb-4">Chọn gói phù hợp cho đội ngũ của bạn</p>
+
+      <!-- Toggle -->
+      <div class="d-flex justify-content-center align-items-center gap-3 mb-5">
+        <span class="text-secondary">Theo tháng</span>
+        <label class="toggle-switch">
+          <input type="checkbox" id="billingToggle" checked>
+          <span class="toggle-slider"></span>
+        </label>
+        <span class="text-primary fw-bold">Theo năm <span class="badge bg-info text-dark">Tiết kiệm 20%</span></span>
+      </div>
+
+      <!-- Pricing Grid -->
+      <div class="pricing-grid">
+        <!-- Free Plan -->
+        <div class="pricing-card d-flex flex-column justify-content-between" data-aos="zoom-in">
+          <div class="pricing-card-title">Free</div>
+          <div class="pricing-card-price">
+            <span class="pricing-card-price-amount">$0</span>
+            <div class="pricing-card-price-period">/ người / tháng</div>
+          </div>
+          <p class="mt-2">Dành cho cá nhân quản lý công việc và dự án nhỏ.</p>
+          <ul class="pricing-card-features">
+            <li><i class="bi bi-check-circle text-success"></i> Tối đa 5 thành viên</li>
+            <li><i class="bi bi-x-circle text-danger"></i> AI Basic</li>
+            <li><i class="bi bi-x-circle text-danger"></i> Hỗ trợ 24/7</li>
+            <li><i class="bi bi-check-circle text-success"></i> 100 Blocks</li>
+          </ul>
+          <button class="btn btn-outline-primary pricing-card-btn mt-auto" onclick="assignPlan('free')">Dùng miễn phí</button>
+        </div>
+
+        <!-- Basic -->
+        <div class="pricing-card featured d-flex flex-column justify-content-between" data-aos="zoom-in">
+          <div class="pricing-card-title">Basic</div>
+          <div class="pricing-card-price">
+            <span class="pricing-card-price-amount" id="basic-price">$15</span>
+            <div class="pricing-card-price-period">/ người / tháng</div>
+          </div>
+          <p class="mt-2">Cho team nhỏ muốn cộng tác hiệu quả hơn.</p>
+          <ul class="pricing-card-features">
+            <li><i class="bi bi-check-circle text-success"></i> Tối đa 1,000 thành viên</li>
+            <li><i class="bi bi-check-circle text-success"></i> AI Basic</li>
+            <li><i class="bi bi-check-circle text-success"></i> Hỗ trợ 24/7</li>
+            <li><i class="bi bi-check-circle text-success"></i> Blocks không giới hạn</li>
+          </ul>
+          <button class="btn btn-primary pricing-card-btn mt-auto" onclick="assignPlan('basic')">Bắt đầu ngay</button>
+        </div>
+
+        <!-- Advanced -->
+        <div class="pricing-card d-flex flex-column justify-content-between" data-aos="zoom-in">
+          <div class="pricing-card-title">Advanced</div>
+          <div class="pricing-card-price">
+            <span class="pricing-card-price-amount" id="advanced-price">$23</span>
+            <div class="pricing-card-price-period">/ người / tháng</div>
+          </div>
+          <p class="mt-2">Cho công ty cần tính năng nâng cao và bảo mật.</p>
+          <ul class="pricing-card-features">
+            <li><i class="bi bi-check-circle text-success"></i> Thành viên không giới hạn</li>
+            <li><i class="bi bi-check-circle text-success"></i> AI Basic</li>
+            <li><i class="bi bi-check-circle text-success"></i> Hỗ trợ 24/7</li>
+            <li><i class="bi bi-check-circle text-success"></i> Blocks không giới hạn</li>
+          </ul>
+          <button class="btn btn-primary pricing-card-btn mt-auto" onclick="assignPlan('advanced')">Bắt đầu ngay</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 HKSpace. Mọi quyền được bảo lưu.</p>
+      <p>
+        <a href="#">Chính sách bảo mật</a> • 
+        <a href="#">Điều khoản sử dụng</a> • 
+        <a href="#">Liên hệ</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ once: true });
+
+    function assignPlan(plan) {
+      window.location.href = `checkout.html?plan=${plan}`;
+    }
+
+    // Toggle monthly/yearly pricing
+    document.getElementById('billingToggle').addEventListener('change', function(e) {
+      const isYearly = e.target.checked;
+      const basic = document.getElementById('basic-price');
+      const adv = document.getElementById('advanced-price');
+      basic.textContent = isYearly ? '$12' : '$15';
+      adv.textContent = isYearly ? '$18' : '$23';
+    });
+  </script>
 </body>
 </html>
