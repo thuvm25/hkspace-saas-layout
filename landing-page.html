@@ -14,52 +14,62 @@
 
   <style>
     :root {
-      --primary: #007bff;
-      --secondary: #6c757d;
-      --bg-light: #f8f9fa;
+        --primary: #0056D2;
+        --secondary: #6c757d;
+        --bg-light: #f8f9fa;
     }
 
     body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #fff;
-      color: #333;
+        font-family: 'Poppins', sans-serif;
+        background-color: #fff;
+        color: #333;
+    }
+
+    /* --- buttons --- */
+    .btn-primary {
+        background-color: var(--primary);
+        border-color: var(--primary);        
+    }
+
+    .btn-primary:hover {
+        background-color: var(--primary);       
+        border-color: var(--primary);          
+    }
+
+    .btn-outline-primary {
+        color: var(--primary);               
+        border-color: var(--primary);         
+    }
+
+    .btn-outline-primary:hover {
+        background-color: var(--primary);    
+        color: #fff;
     }
 
     /* Navbar */
-    .navbar {
-      background-color: white;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-
     .navbar-brand {
-      font-weight: 700;
-      color: var(--primary);
+        font-weight: 700;
+        color: var(--primary);
     }
 
     .navbar-nav a {
-      color: #555;
-      text-decoration: none;
-      padding: 8px 16px;
-      border-radius: 8px;
-      transition: all 0.3s;
-    }
-
-    .navbar-nav a:hover,
-    .navbar-nav a.active {
-      background-color: var(--primary);
-      color: #fff !important;
+        color: #555;
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 8px;
+        transition: all 0.3s;
     }
 
     /* Hero Section */
     .hero {
         background: linear-gradient(135deg, #f7f9ff 0%, #e8f0ff 100%);
-        position: relative;
-        overflow: hidden;
     }
 
     .hero .floating-img {
         max-width: 90%;
         animation: float 6s ease-in-out infinite;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
     }
 
     @keyframes float {
@@ -73,7 +83,7 @@
         left: -100px;
         width: 400px;
         height: 400px;
-        background: radial-gradient(circle at center, rgba(0,123,255,0.15), transparent 70%);
+        background: radial-gradient(circle at center, rgba(0,86,210,0.15), transparent 70%);
         border-radius: 50%;
         animation: pulse 8s ease-in-out infinite;
     }
@@ -81,144 +91,6 @@
     @keyframes pulse {
         0%, 100% { transform: scale(1); opacity: 0.5; }
         50% { transform: scale(1.3); opacity: 0.2; }
-    }
-
-    /* Pricing */
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
-
-    .pricing-card {
-      background: white;
-      border: 1px solid #e5e5e5;
-      border-radius: 16px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      transition: transform .3s, box-shadow .3s;
-      padding: 30px;
-      text-align: center;
-    }
-
-    .pricing-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-
-    .pricing-card.featured {
-      border: 2px solid var(--primary);
-      position: relative;
-    }
-
-    .pricing-card.featured::before {
-      content: "Phổ biến nhất";
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--primary);
-      color: #fff;
-      padding: 4px 12px;
-      font-size: 0.8rem;
-      border-radius: 8px;
-    }
-
-    .pricing-card-title {
-      font-weight: 600;
-      font-size: 1.25rem;
-      margin-bottom: 12px;
-    }
-
-    .pricing-card-price-amount {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    .pricing-card-price-period {
-      color: #666;
-      font-size: 0.9rem;
-    }
-
-    .pricing-card-features {
-      list-style: none;
-      padding: 0;
-      margin: 20px 0;
-      text-align: left;
-    }
-
-    .pricing-card-features li {
-      padding: 6px 0;
-      border-bottom: 1px solid #f0f0f0;
-    }
-
-    .pricing-card-btn {
-      border-radius: 8px;
-      padding: 10px 20px;
-    }
-
-    /* Toggle */
-    .toggle-switch {
-      position: relative;
-      display: inline-block;
-      width: 50px;
-      height: 26px;
-    }
-
-    .toggle-switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .toggle-slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ddd;
-      transition: .4s;
-      border-radius: 26px;
-    }
-
-    .toggle-slider:before {
-      position: absolute;
-      content: "";
-      height: 20px;
-      width: 20px;
-      left: 3px;
-      bottom: 3px;
-      background-color: white;
-      transition: .4s;
-      border-radius: 50%;
-    }
-
-    .toggle-switch input:checked + .toggle-slider {
-      background-color: var(--primary);
-    }
-
-    .toggle-switch input:checked + .toggle-slider:before {
-      transform: translateX(24px);
-    }
-
-    /* Footer */
-    footer {
-      background-color: #f8f9fa;
-      text-align: center;
-      padding: 40px 0;
-      color: #666;
-      font-size: 0.95rem;
-    }
-
-    footer a {
-      color: var(--primary);
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
     }
 
     /* Feature */
@@ -229,7 +101,7 @@
 
     .card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0, 123, 255, 0.15);
+        box-shadow: 0 10px 25px rgba(0,86,210,0.18);
     }
 
     #features img {
@@ -238,53 +110,329 @@
 
     #features img:hover {
         transform: scale(1.03);
-        box-shadow: 0 10px 20px rgba(0,123,255,0.15);
+        box-shadow: 0 10px 25px rgba(0, 86, 210, 0.18);
     }
 
-    /* App */
+    /* --- App Section background --- */
     #app {
         background: linear-gradient(180deg, #f7f9ff 0%, #ffffff 100%);
         position: relative;
         z-index: 1;
     }
 
-    #app .phone-mockup {
+    /* --- 3D center-flip mockup và hover effect --- */
+    .phone-stack-flip {
         position: relative;
+        width: 230px;
+        height: 480px;
+        margin: 0 auto;
+        perspective: 1200px;
+        transform-style: preserve-3d;
     }
 
-    #app .bg-circle {
+    .phone-stack-flip .screen {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 25px; /* vẫn dùng border-radius đặc thù */
+        object-fit: cover;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        transition: all 0.9s cubic-bezier(.25,.8,.25,1);
+        transform-origin: center center;
+        cursor: pointer;
+    }
+
+    /* Vị trí mặc định */
+    .phone-stack-flip .screen:nth-child(1) {
+        transform: rotateY(12deg) translateX(-70px) scale(0.9);
+        z-index: 1;
+        opacity: 0.5;
+        filter: blur(1px);
+    }
+    .phone-stack-flip .screen:nth-child(2) {
+        transform: translateZ(0) scale(1);
+    }
+    .phone-stack-flip .screen:nth-child(3) {
+        transform: rotateY(-12deg) translateX(70px) scale(0.9);
+        z-index: 2;
+        opacity: 0.5;
+        filter: blur(1px);
+    }
+
+    /* Hover effect */
+    .phone-stack-flip:hover .screen:nth-child(2) {
+        transform: translateZ(90px) scale(1.08);
+        box-shadow: 0 25px 60px rgba(0,86,210,0.45);
+    }
+
+    /* --- Vòng sáng nền --- */
+    .phone-stack-flip::before {
+        content: "";
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 400px;
-        height: 400px;
+        width: 380px;
+        height: 380px;
+        background: radial-gradient(circle at center, rgba(0,86,210,0.15), transparent 70%);
         transform: translate(-50%, -50%);
-        background: radial-gradient(circle at center, rgba(0,123,255,0.15), transparent 70%);
         border-radius: 50%;
         z-index: -1;
         animation: pulse 6s ease-in-out infinite;
     }
 
     @keyframes pulse {
-        0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+        0%,100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
         50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.3; }
+    }
+
+    /* Pricing */
+    .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+    }
+
+    .pricing-card {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        height: 100%;
+        background: white;
+        border: 1px solid #e5e5e5;
+        border-radius: 16px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        transition: transform .3s, box-shadow .3s;
+        padding: 30px;
+    }
+
+    .pricing-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 25px rgba(0,86,210,0.18);
+    }
+
+    .pricing-card-content {
+        flex-grow: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .pricing-card-btn {
+        margin-top: 12px !important;
+    }
+
+    .pricing-subcard {
+        margin-top: auto;
+        background: #f9f9f9;
+        border: 1px solid #e5e5e5;
+        border-radius: 12px;
+        padding: 16px 20px;
+        text-align: left;
+    }
+
+    .pricing-card.featured {
+        border: 2px solid var(--primary);
+        position: relative;
+    }
+
+    .pricing-card.featured::before {
+        content: "Phổ biến nhất";
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--primary);
+        color: #fff;
+        padding: 4px 12px;
+        font-size: 0.8rem;
+        border-radius: 8px;
+    }
+
+    .pricing-card-title {
+        font-weight: 600;
+        font-size: 1.25rem;
+        margin-bottom: 12px;
+    }
+
+    .pricing-card-price-amount {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--black);
+    }
+
+    .pricing-card-price-period {
+        color: #777;
+        font-size: 1rem;
+    }
+
+    .pricing-card-features {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0;
+        text-align: left;
+    }
+
+    .pricing-card-features li {
+        padding: 6px 0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .pricing-subcard-title {
+        font-weight: 600;
+        font-size: 1rem;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: #222;
+    }
+
+    .pricing-subcard-features {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .pricing-subcard-features li {
+        padding: 6px 0;
+        font-size: 0.95rem;
+        color: #444;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .pricing-app-icons {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+
+    .pricing-app-icons img {
+        width: 20px;
+        height: 20px;
+        background: none; 
+        padding: 0;       
+        border-radius: 6px;
+        object-fit: contain;
+        box-shadow: none;
+    }
+
+
+    .pricing-subcard .badge {
+      font-size: 0.7rem;
+      vertical-align: middle;
+    }
+
+    /* Toggle */
+    .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 26px;
+    }
+
+    .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .toggle-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ddd;
+        transition: .4s;
+        border-radius: 26px;
+    }
+
+    .toggle-slider:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+    .toggle-switch input:checked + .toggle-slider {
+        background-color: var(--primary);
+    }
+
+    .toggle-switch input:checked + .toggle-slider:before {
+        transform: translateX(24px);
+    }
+
+    /* FAQ */
+    #faq {
+        background: linear-gradient(180deg, #f9fbff 0%, #ffffff 100%);
+    }
+
+    .accordion-item {
+        border-radius: 12px;
+        margin-bottom: 12px;
+        overflow: hidden;
+        box-shadow: 0 3px 10px rgba(0,86,210,0.08);
+        transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .accordion-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(0,86,210,0.15);
+    }
+
+    .accordion-button:not(.collapsed) {
+        color: var(--primary);
+        background: #e8f0ff;
+    }
+
+    .accordion-button::after {
+        transition: transform 0.3s ease;
+    }
+
+    .accordion-button:not(.collapsed)::after {
+        transform: rotate(135deg);
+    }
+
+    /* Footer */
+    footer a:hover {
+        text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg sticky-top">
+  <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
     <div class="container">
-      <a class="navbar-brand" href="landing-page.html">HKSpace</a>
+      <a class="navbar-brand fw-bold text-primary" href="landing-page.html">HKSpace</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
-          <li><a href="landing-page.html" class="active">Bảng giá</a></li>
-          <li><a href="subscription.html">Gói đăng ký</a></li>
-          <li><a href="checkout.html">Thanh toán</a></li>
-          <li><a href="payment.html">Cổng thanh toán</a></li>
+          <li class="nav-item">
+            <a href="landing-page.html" class="nav-link active px-3 py-2 rounded text-white bg-primary">Bảng giá</a>
+          </li>
+          <li class="nav-item">
+            <a href="subscription.html" class="nav-link px-3 py-2 rounded">Gói đăng ký</a>
+          </li>
+          <li class="nav-item">
+            <a href="checkout.html" class="nav-link px-3 py-2 rounded">Thanh toán</a>
+          </li>
+          <li class="nav-item">
+            <a href="payment.html" class="nav-link px-3 py-2 rounded">Cổng thanh toán</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -294,7 +442,7 @@
   <section class="hero position-relative overflow-hidden">
     <div class="container py-5 text-center text-lg-start">
       <div class="row align-items-center">
-        <div class="col-lg-6" data-aos="fade-right">
+        <div class="col-lg-5" data-aos="fade-right">
           <h1 class="fw-bold display-5 mb-3">
             Giải pháp SaaS quản lý không gian làm việc thông minh
           </h1>
@@ -306,12 +454,11 @@
             <a href="#features" class="btn btn-outline-primary btn-lg">Xem tính năng</a>
           </div>
         </div>
-        <div class="col-lg-6 text-center mt-5 mt-lg-0" data-aos="fade-left">
-          <img src="Image/Dashboard.png" alt="HKSpace Dashboard Preview" class="img-fluid floating-img">
+        <div class="col-lg-7 text-center mt-5 mt-lg-0" data-aos="fade-left">
+          <img src="Image/HKSapce.jpg" alt="HKSpace Dashboard Preview" class="img-fluid floating-img rounded">
         </div>
       </div>
     </div>
-  
     <div class="hero-bg"></div>
   </section>
 
@@ -320,7 +467,7 @@
     <div class="container text-center">
       <h2 class="fw-bold mb-3">Tính năng nổi bật của HKSpace</h2>
       <p class="text-secondary mb-5">Tối ưu hóa không gian làm việc của bạn với nền tảng mạnh mẽ và dễ dùng</p>
-  
+
       <div class="row g-4">
         <!-- Feature 1 -->
         <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
@@ -328,14 +475,14 @@
             <div class="text-primary fs-1 mb-3">
               <i class="bi bi-building-check"></i>
             </div>
-            <h5 class="fw-bold">Quản lý không gian thông minh</h5>
+            <h5 class="fw-bold">Quản lý không gian làm việc</h5>
             <p class="text-secondary">
-              Theo dõi phòng họp, bàn làm việc và khu vực dùng chung một cách trực quan. 
-              Dễ dàng kiểm soát lịch đặt chỗ và tối ưu hiệu suất sử dụng.
+              Theo dõi công việc và tạo, quản lý công việc một cách trực quan. 
+              Dễ dàng kiểm soát lịch làm việc và tối ưu hiệu suất sử dụng.
             </p>
           </div>
         </div>
-  
+
         <!-- Feature 2 -->
         <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
           <div class="card border-0 h-100 shadow-sm py-4 px-3">
@@ -349,7 +496,7 @@
             </p>
           </div>
         </div>
-  
+
         <!-- Feature 3 -->
         <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
           <div class="card border-0 h-100 shadow-sm py-4 px-3">
@@ -364,15 +511,55 @@
           </div>
         </div>
       </div>
+
+      <div class="row g-4 mt-3">
+        <!-- Feature 4 -->
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card border-0 h-100 shadow-sm py-4 px-3">
+            <div class="text-primary fs-1 mb-3">
+              <i class="bi bi-clipboard-data"></i>
+            </div>
+            <h5 class="fw-bold">Công việc và công việc phụ</h5>
+            <p class="text-secondary">
+                Chia các dự án thành các phần có thể quản lý được để hoàn thành công việc.
+            </p>
+          </div>
+        </div>
+  
+        <!-- Feature 5 -->
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+          <div class="card border-0 h-100 shadow-sm py-4 px-3">
+            <div class="text-primary fs-1 mb-3">
+              <i class="bi bi-journal-check"></i>
+            </div>
+            <h5 class="fw-bold">Tình trạng, người được bàn giao, ngày kết thúc</h5>
+            <p class="text-secondary">
+                Vì vậy, mọi người đều biết phải làm gì và khi nào nên làm.
+            </p>
+          </div>
+        </div>
+  
+        <!-- Feature 6 -->
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+          <div class="card border-0 h-100 shadow-sm py-4 px-3">
+            <div class="text-primary fs-1 mb-3">
+              <i class="bi bi-list-task"></i>
+            </div>
+            <h5 class="fw-bold">Công việc của tôi</h5>
+            <p class="text-secondary">
+                Quản lý mọi nhiệm vụ được giao cho bạn ở một nơi.
+            </p>
+          </div>
+        </div>
     </div>
-  </section>  
+  </section>
 
   <!-- Mobile App Section -->
-  <section class="py-5 position-relative overflow-hidden" id="app" data-aos="fade-up">
+<section class="py-5" id="app" data-aos="fade-up">
     <div class="container text-center">
       <h2 class="fw-bold mb-3">Ứng dụng di động HKSpace</h2>
       <p class="text-secondary mb-5">
-        Quản lý công việc, đặt chỗ và cộng tác mọi lúc mọi nơi với HKSpace Mobile – có mặt trên iOS và Android.
+        Quản lý, xem công việc và cộng tác mọi lúc mọi nơi với HKSpace Mobile – có mặt trên iOS và Android.
       </p>
   
       <div class="row align-items-center justify-content-center">
@@ -381,7 +568,7 @@
           <h4 class="fw-bold mb-3">Trải nghiệm linh hoạt và mượt mà</h4>
           <p class="text-secondary mb-4">
             Giao diện tối giản, tốc độ nhanh, tích hợp AI hỗ trợ lịch làm việc và gợi ý thông minh.  
-            Bạn có thể theo dõi trạng thái không gian, nhận thông báo, và chia sẻ tài nguyên ngay trong app.
+            Bạn có thể theo dõi trạng thái công việc, nhận thông báo ngay trong app.
           </p>
           <div class="d-flex gap-3">
             <a href="#" class="btn btn-dark d-flex align-items-center gap-2">
@@ -395,15 +582,16 @@
   
         <!-- Image -->
         <div class="col-lg-5 text-center" data-aos="fade-left">
-          <div class="phone-mockup position-relative">
-            <img src="Image/Login.jpg" alt="HKSpace App Preview" class="img-fluid shadow-lg rounded-4 border border-light" style="max-height: 520px;">
-            <img src="Image/Home.jpg" alt="HKSpace App Preview" class="img-fluid shadow-lg rounded-4 border border-light" style="max-height: 520px;">
-            <div class="bg-circle"></div>
-          </div>
+          <div class="phone-stack-flip">
+            <img src="Image/Login.jpg" alt="App 1" class="screen rounded-4 shadow">
+            <img src="Image/Home.jpg" alt="App 2" class="screen rounded-4 shadow">
+            <img src="Image/Dashboard.jpg" alt="App 3" class="screen rounded-4 shadow">
+          </div>                
         </div>
       </div>
     </div>
-  </section>  
+  </section>
+  
 
   <!-- Pricing Section -->
   <section class="py-5" id="pricing" data-aos="fade-up">
@@ -424,70 +612,277 @@
       <!-- Pricing Grid -->
       <div class="pricing-grid">
         <!-- Free Plan -->
-        <div class="pricing-card d-flex flex-column justify-content-between" data-aos="zoom-in">
+        <div class="pricing-card d-flex flex-column" data-aos="zoom-in">
           <div class="pricing-card-title">Free</div>
           <div class="pricing-card-price">
             <span class="pricing-card-price-amount">$0</span>
-            <div class="pricing-card-price-period">/ người / tháng</div>
+            <span class="pricing-card-price-period"> người / tháng</span>
           </div>
           <p class="mt-2">Dành cho cá nhân quản lý công việc và dự án nhỏ.</p>
-          <ul class="pricing-card-features">
-            <li><i class="bi bi-check-circle text-success"></i> Tối đa 5 thành viên</li>
-            <li><i class="bi bi-x-circle text-danger"></i> AI Basic</li>
-            <li><i class="bi bi-x-circle text-danger"></i> Hỗ trợ 24/7</li>
-            <li><i class="bi bi-check-circle text-success"></i> 100 Blocks</li>
-          </ul>
           <button class="btn btn-outline-primary pricing-card-btn mt-auto" onclick="assignPlan('free')">Dùng miễn phí</button>
+          <ul class="pricing-card-features">
+            <li><i class="bi bi-check text-success"></i> Tối đa 5 thành viên</li>
+            <li><i class="bi bi-x text-danger"></i> AI Basic</li>
+            <li><i class="bi bi-x text-danger"></i> Hỗ trợ 24/7</li>
+            <li><i class="bi bi-check text-success"></i> 100 Blocks</li>
+          </ul>
+          <div class="pricing-subcard mt-4">
+            <div class="pricing-subcard-title">
+              <i class="bi bi-robot text-primary"></i> HKSpace AI
+            </div>
+            <ul class="pricing-subcard-features">
+              <li><i class="bi bi-check text-success"></i> Thử nghiệm HKSpace AI</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Plus -->
+        <div class="pricing-card d-flex flex-column" data-aos="zoom-in">
+          <div class="pricing-card-title">Plus</div>
+          <div class="pricing-card-price">
+              <span class="pricing-card-price-amount" id="plus-price">$10</span>
+              <span class="pricing-card-price-period"> người / tháng</span>
+          </div>
+          <p class="mt-2">Cho công ty cần tính năng nâng cao và bảo mật.</p>
+          <button class="btn btn-primary pricing-card-btn mt-auto" onclick="assignPlan('advanced')">Bắt đầu ngay</button>
+          <ul class="pricing-card-features">
+              <li><i class="bi bi-check text-success"></i> Thành viên không giới hạn</li>
+              <li><i class="bi bi-check text-success"></i> AI Basic</li>
+              <li><i class="bi bi-check text-success"></i> Hỗ trợ 24/7</li>
+              <li><i class="bi bi-check text-success"></i> Blocks không giới hạn</li>
+          </ul>
+          <div class="pricing-subcard mt-4">
+            <div class="pricing-subcard-title">
+              <i class="bi bi-robot text-primary"></i> HKSpace AI
+            </div>
+            <ul class="pricing-subcard-features">
+              <li><i class="bi bi-check text-success"></i> Thử nghiệm HKSpace AI</li>
+            </ul>
+          </div>
         </div>
 
         <!-- Basic -->
-        <div class="pricing-card featured d-flex flex-column justify-content-between" data-aos="zoom-in">
+        <div class="pricing-card featured d-flex flex-column" data-aos="zoom-in">
           <div class="pricing-card-title">Basic</div>
           <div class="pricing-card-price">
             <span class="pricing-card-price-amount" id="basic-price">$15</span>
-            <div class="pricing-card-price-period">/ người / tháng</div>
+            <span class="pricing-card-price-period"> người / tháng</span>
           </div>
           <p class="mt-2">Cho team nhỏ muốn cộng tác hiệu quả hơn.</p>
+          <button class="btn btn-primary pricing-card-btn mt-auto" onclick="assignPlan('basic')">Bắt đầu ngay</button>        
           <ul class="pricing-card-features">
-            <li><i class="bi bi-check-circle text-success"></i> Tối đa 1,000 thành viên</li>
-            <li><i class="bi bi-check-circle text-success"></i> AI Basic</li>
-            <li><i class="bi bi-check-circle text-success"></i> Hỗ trợ 24/7</li>
-            <li><i class="bi bi-check-circle text-success"></i> Blocks không giới hạn</li>
+            <li><i class="bi bi-check text-success"></i> Tối đa 1,000 thành viên</li>
+            <li><i class="bi bi-check text-success"></i> AI Basic</li>
+            <li><i class="bi bi-check text-success"></i> Hỗ trợ 24/7</li>
+            <li><i class="bi bi-check text-success"></i> Blocks không giới hạn</li>
           </ul>
-          <button class="btn btn-primary pricing-card-btn mt-auto" onclick="assignPlan('basic')">Bắt đầu ngay</button>
+          <div class="pricing-subcard mt-4">
+            <div class="pricing-subcard-title">
+              <i class="bi bi-robot text-primary"></i> HKSpace AI
+            </div>
+            <ul class="pricing-subcard-features">
+              <li><i class="bi bi-check text-success"></i> Trợ lý ảo HK's AI Assistant</li>
+              <li><i class="bi bi-check text-success"></i> Tìm kiếm doanh nghiệp</li>
+            </ul>
+            <div class="pricing-app-icons mt-2">
+              <img src="https://img.icons8.com/?size=100&id=OXVeOEj6qZqX&format=png&color=000000" alt="Slack">
+              <img src="https://img.icons8.com/?size=100&id=AZOZNnY73haj&format=png&color=000000" alt="GitHub">
+              <img src="https://img.icons8.com/?size=100&id=ya4CrqO7PgnY&format=png&color=000000" alt="Google Drive">
+              <img src="https://img.icons8.com/?size=100&id=9pogsim4zHfB&format=png&color=000000" alt="OneDrive">
+              <img src="https://img.icons8.com/?size=100&id=13417&format=png&color=000000" alt="PDF">
+            </div>
+            <div class="pricing-app-icons mt-2">
+              <span class="badge bg-secondary">Beta</span>
+              <img src="https://img.icons8.com/?size=100&id=P7UIlhbpWzZm&format=png&color=000000" alt="Gmail">
+              <img src="https://img.icons8.com/?size=100&id=oROcPah5ues6&format=png&color=000000" alt="Jira">
+              <img src="https://img.icons8.com/?size=100&id=68803&format=png&color=000000" alt="Teams">
+              <img src="https://img.icons8.com/?size=100&id=117558&format=png&color=000000" alt="SharePoint">
+            </div>
+            <ul class="pricing-subcard-features mt-3">
+                <li><i class="bi bi-check text-success"></i> AI Gợi ý Tasks <span class="badge bg-secondary ms-1">Beta</span></li>
+                <li><i class="bi bi-check text-success"></i> AI Mô tả Công việc <span class="badge bg-secondary ms-1">Beta</span></li>
+                <li><i class="bi bi-check text-success"></i> AI Nghiên cứu & Tổng hợp <span class="badge bg-secondary ms-1">Beta</span></li>
+            </ul>
+          </div>
         </div>
 
         <!-- Advanced -->
-        <div class="pricing-card d-flex flex-column justify-content-between" data-aos="zoom-in">
+        <div class="pricing-card d-flex flex-column" data-aos="zoom-in">
           <div class="pricing-card-title">Advanced</div>
           <div class="pricing-card-price">
             <span class="pricing-card-price-amount" id="advanced-price">$23</span>
-            <div class="pricing-card-price-period">/ người / tháng</div>
+            <span class="pricing-card-price-period"> người / tháng</span>
           </div>
           <p class="mt-2">Cho công ty cần tính năng nâng cao và bảo mật.</p>
-          <ul class="pricing-card-features">
-            <li><i class="bi bi-check-circle text-success"></i> Thành viên không giới hạn</li>
-            <li><i class="bi bi-check-circle text-success"></i> AI Basic</li>
-            <li><i class="bi bi-check-circle text-success"></i> Hỗ trợ 24/7</li>
-            <li><i class="bi bi-check-circle text-success"></i> Blocks không giới hạn</li>
-          </ul>
           <button class="btn btn-primary pricing-card-btn mt-auto" onclick="assignPlan('advanced')">Bắt đầu ngay</button>
+          <ul class="pricing-card-features">
+            <li><i class="bi bi-check text-success"></i> Thành viên không giới hạn</li>
+            <li><i class="bi bi-check text-success"></i> AI Basic</li>
+            <li><i class="bi bi-check text-success"></i> Hỗ trợ 24/7</li>
+            <li><i class="bi bi-check text-success"></i> Blocks không giới hạn</li>
+          </ul>
+          <div class="pricing-subcard mt-4">
+            <div class="pricing-subcard-title">
+              <i class="bi bi-robot text-primary"></i> HKSpace AI
+            </div>
+            <ul class="pricing-subcard-features">
+              <li><i class="bi bi-check text-success"></i> Trợ lý ảo HK's AI Assistant</li>
+              <li><i class="bi bi-check text-success"></i> Tìm kiếm doanh nghiệp</li>
+            </ul>
+            <div class="pricing-app-icons mt-2">
+              <img src="https://img.icons8.com/?size=100&id=OXVeOEj6qZqX&format=png&color=000000" alt="Slack">
+              <img src="https://img.icons8.com/?size=100&id=AZOZNnY73haj&format=png&color=000000" alt="GitHub">
+              <img src="https://img.icons8.com/?size=100&id=ya4CrqO7PgnY&format=png&color=000000" alt="Google Drive">
+              <img src="https://img.icons8.com/?size=100&id=9pogsim4zHfB&format=png&color=000000" alt="OneDrive">
+              <img src="https://img.icons8.com/?size=100&id=13417&format=png&color=000000" alt="PDF">
+            </div>
+            <div class="pricing-app-icons mt-2">
+              <span class="badge bg-secondary">Beta</span>
+              <img src="https://img.icons8.com/?size=100&id=P7UIlhbpWzZm&format=png&color=000000" alt="Gmail">
+              <img src="https://img.icons8.com/?size=100&id=oROcPah5ues6&format=png&color=000000" alt="Jira">
+              <img src="https://img.icons8.com/?size=100&id=68803&format=png&color=000000" alt="Teams">
+              <img src="https://img.icons8.com/?size=100&id=117558&format=png&color=000000" alt="SharePoint">
+            </div>
+            <ul class="pricing-subcard-features mt-3">
+              <li><i class="bi bi-check text-success"></i> AI Gợi ý Tasks</li>
+              <li><i class="bi bi-check text-success"></i> AI Mô tả Công việc <span class="badge bg-secondary ms-1">Beta</span></li>
+              <li><i class="bi bi-check text-success"></i> AI Nghiên cứu & Tổng hợp <span class="badge bg-secondary ms-1">Beta</span></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- FAQ Section -->
+<section id="faq" class="py-5 position-relative text-center" data-aos="fade-up">
+    <div class="container">
+      <h2 class="fw-bold mb-4">Câu hỏi thường gặp (FAQs)</h2>
+  
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="accordion" id="faqAccordion">
+  
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faq1">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1Content">
+                  HKSpace là gì?
+                </button>
+              </h2>
+              <div id="faq1Content" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  HKSpace là nền tảng SaaS giúp doanh nghiệp quản lý công việc, không gian làm việc và nhân sự một cách thông minh – tất cả trong một nơi.
+                </div>
+              </div>
+            </div>
+  
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faq2">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2Content">
+                  Tôi có thể dùng thử miễn phí không?
+                </button>
+              </h2>
+              <div id="faq2Content" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Có! Bạn có thể bắt đầu với gói <strong>Free</strong> để trải nghiệm nền tảng và nâng cấp lên gói trả phí bất cứ lúc nào.
+                </div>
+              </div>
+            </div>
+  
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faq3">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3Content">
+                  HKSpace AI hoạt động như thế nào?
+                </button>
+              </h2>
+              <div id="faq3Content" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Trợ lý ảo HKSpace AI hỗ trợ bạn trong việc tạo công việc, mô tả nhiệm vụ, gợi ý lịch làm việc và tìm kiếm dữ liệu doanh nghiệp tự động.
+                </div>
+              </div>
+            </div>
+  
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faq4">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4Content">
+                  Tôi có thể quản lý team trên HKSpace không?
+                </button>
+              </h2>
+              <div id="faq4Content" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Hoàn toàn có thể. HKSpace cho phép bạn mời thành viên, phân quyền và theo dõi tiến độ công việc theo phòng ban hoặc dự án.
+                </div>
+              </div>
+            </div>
+  
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="faq5">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5Content">
+                  Ứng dụng di động HKSpace có sẵn chưa?
+                </button>
+              </h2>
+              <div id="faq5Content" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Ứng dụng di động HKSpace đã có trên cả iOS và Android, cho phép bạn theo dõi công việc mọi lúc mọi nơi.
+                </div>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- Contact Us Section -->
+  <section id="contact" class="py-5" data-aos="fade-up">
+    <div class="container">
+      <h2 class="fw-bold mb-4 text-center">Liên hệ với chúng tôi</h2>
+      <p class="text-center mb-5">Có thắc mắc? Hãy gửi cho chúng tôi một tin nhắn, chúng tôi sẽ phản hồi sớm nhất.</p>
+      
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <!-- Card nổi với shadow, tĩnh -->
+          <div class="card shadow-sm p-4">
+            <form id="contactForm">
+              <div class="mb-3">
+                <label for="name" class="form-label">Tên của bạn</label>
+                <input type="text" class="form-control" id="name" placeholder="Nhập tên" required>
+              </div>
+  
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Nhập email" required>
+              </div>
+  
+              <div class="mb-3">
+                <label for="message" class="form-label">Nội dung</label>
+                <textarea class="form-control" id="message" rows="5" placeholder="Nhập nội dung" required></textarea>
+              </div>
+  
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary">Gửi liên hệ</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
   <!-- Footer -->
-  <footer>
+  <footer class="bg-light text-center py-5 text-muted">
     <div class="container">
       <p>© 2025 HKSpace. Mọi quyền được bảo lưu.</p>
       <p>
-        <a href="#">Chính sách bảo mật</a> • 
-        <a href="#">Điều khoản sử dụng</a> • 
-        <a href="#">Liên hệ</a>
+        <a href="#" class="text-primary text-decoration-none">Chính sách bảo mật</a> • 
+        <a href="#" class="text-primary text-decoration-none">Điều khoản sử dụng</a> • 
+        <a href="#" class="text-primary text-decoration-none">Liên hệ</a>
       </p>
     </div>
   </footer>
+  
 
   <!-- JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -506,6 +901,76 @@
       const adv = document.getElementById('advanced-price');
       basic.textContent = isYearly ? '$12' : '$15';
       adv.textContent = isYearly ? '$18' : '$23';
+    });
+
+    // Tự động đổi vị trí ảnh giữa
+    const stack = document.querySelector('.phone-stack-flip');
+    const screens = Array.from(stack.querySelectorAll('.screen'));
+    let index = 0;
+    let interval;
+
+    function updatePositions() {
+        const next = (index + 1) % screens.length;
+        const prev = (index + 2) % screens.length;
+
+        // Reset tất cả
+        screens.forEach(s => {
+        s.style.transition = "all 0.9s cubic-bezier(.25,.8,.25,1)";
+        s.style.pointerEvents = "none"; // tạm tắt hover
+        });
+
+        // Bên trái
+        screens[prev].style.transform = "rotateY(12deg) translateX(-70px) scale(0.9)";
+        screens[prev].style.zIndex = 1;
+        screens[prev].style.opacity = 0.5;
+        screens[prev].style.filter = "blur(1px)";
+
+        // Ở giữa (hiện chính)
+        screens[index].style.transform = "translateZ(60px) scale(1)";
+        screens[index].style.zIndex = 3;
+        screens[index].style.opacity = 1;
+        screens[index].style.filter = "none";
+        screens[index].style.pointerEvents = "auto"; // chỉ ảnh giữa được hover
+
+        // Bên phải
+        screens[next].style.transform = "rotateY(-12deg) translateX(70px) scale(0.9)";
+        screens[next].style.zIndex = 2;
+        screens[next].style.opacity = 0.5;
+        screens[next].style.filter = "blur(1px)";
+    }
+
+    function startFlip() {
+        interval = setInterval(() => {
+        index = (index + 1) % screens.length;
+        updatePositions();
+        }, 3000);
+    }
+
+    function stopFlip() {
+        clearInterval(interval);
+    }
+
+    // Bắt đầu lật tự động
+    updatePositions();
+    startFlip();
+
+    // Khi hover stack -> dừng hiệu ứng
+    stack.addEventListener("mouseenter", stopFlip);
+    stack.addEventListener("mouseleave", startFlip);
+
+
+    // JS đơn giản để xử lý submit form
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // ngăn reload trang
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+
+        // Đây chỉ là ví dụ alert, bạn có thể gửi ajax tới server
+        alert(`Cảm ơn ${name}! Chúng tôi đã nhận được tin nhắn của bạn.`);
+        
+        // reset form
+        this.reset();
     });
   </script>
 </body>
