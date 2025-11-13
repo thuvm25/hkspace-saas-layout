@@ -1,197 +1,225 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thanh toán - HKSpace SaaS</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="custom.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HKSpace - Thanh toán gói đăng ký</title>
+
+  <!-- Bootstrap 5.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+        --primary: #0056D2;
+        --secondary: #6c757d;
+        --bg-light: #f8f9fa;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #fff;
+        color: #333;
+    }
+
+    /* Hero Section */
+    .hero {
+        background: linear-gradient(135deg, #f7f9ff 0%, #e8f0ff 100%);
+        text-align: center;
+        padding: 100px 20px 60px;
+    }
+
+    .hero h1 {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 2rem;
+    }
+
+    .hero p {
+        color: #666;
+        max-width: 600px;
+        margin: 10px auto 0;
+    }
+
+    /* Checkout Card */
+    .checkout-card {
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(0, 86, 210, 0.08);
+        padding: 40px;
+        max-width: 900px;
+        margin: -40px auto 60px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .section-title {
+        font-weight: 600;
+        font-size: 0.95rem;
+        letter-spacing: 0.03em;
+        color: var(--secondary);
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+    }
+
+    .summary-box {
+        background: #f8faff;
+        border-radius: 16px;
+        padding: 20px 24px;
+        margin-bottom: 2rem;
+        border: 1px solid #e2e8ff;
+        transition: 0.3s;
+    }
+
+    .summary-box:hover {
+        border-color: var(--primary);
+        box-shadow: 0 4px 20px rgba(0,86,210,0.1);
+    }
+
+    .form-control, .form-select {
+        border-radius: 12px;
+        padding: 10px 14px;
+    }
+
+    /* Payment Button */
+    .btn-primary {
+        background-color: var(--primary);
+        border-color: var(--primary);
+        border-radius: 50rem;
+        font-weight: 600;
+        padding: 12px;
+        transition: all 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #0044aa;
+        transform: translateY(-2px);
+    }
+
+    /* Trust badges */
+    .trust-badges img {
+        height: 30px;
+        opacity: 0.9;
+        margin: 0 8px;
+        transition: 0.2s;
+    }
+
+    .trust-badges img:hover {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    /* Footer */
+    footer a:hover {
+        text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <a href="landing-page.html" class="navbar-brand">HKSpace</a>
-            <ul class="navbar-nav">
-                <li><a href="landing-page.html">Bảng giá</a></li>
-                <li><a href="subscription.html">Gói đăng ký</a></li>
-                <li><a href="checkout.html" class="active">Thanh toán</a></li>
-                <li><a href="payment.html">Cổng thanh toán</a></li>
-            </ul>
-        </div>
-    </nav>
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Hoàn tất đăng ký HKSpace</h1>
+    <p>Chỉ còn một bước nữa để bắt đầu quản lý không gian làm việc thông minh cùng HKSpace.</p>
+  </section>
 
-    <div class="container mt-5 mb-5">
-        <div class="row">
-            <!-- Left Section: Forms -->
-            <div class="col-lg-8">
-                <h2 class="mb-4">Thông tin đăng ký</h2>
-                
-                <!-- Account Information -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h4 class="mb-0">Tài khoản</h4>
-                    </div>
-                    <div class="p-3">
-                        <div class="form-group">
-                            <label class="form-label">Tên</label>
-                            <input type="text" class="form-input" placeholder="Nhập tên của bạn" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Email (tài khoản)</label>
-                            <input type="email" class="form-input" placeholder="your@email.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Password (tài khoản)</label>
-                            <input type="password" class="form-input" placeholder="••••••••" required>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Business/Individual Information -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h4 class="mb-0">TT doanh nghiệp/cá nhân</h4>
-                    </div>
-                    <div class="p-3">
-                        <div class="form-group">
-                            <label class="form-label">Tên công ty/Cá nhân</label>
-                            <input type="text" class="form-input" placeholder="Tên công ty hoặc tên cá nhân" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Địa chỉ/Tỉnh thành</label>
-                            <input type="text" class="form-input" placeholder="Địa chỉ, Tỉnh/Thành phố" required>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Payment Methods -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h4 class="mb-0">Thanh toán</h4>
-                    </div>
-                    <div class="p-3">
-                        <div class="payment-methods">
-                            <button class="payment-method-btn active" onclick="selectPaymentMethod('bank')">
-                                Chuyển khoản/ Momo
-                            </button>
-                            <button class="payment-method-btn" onclick="selectPaymentMethod('card')">
-                                Visa/Thẻ
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Checkout Button -->
-                <button class="btn btn-primary btn-lg w-100" onclick="processCheckout()">
-                    Tiếp tục thanh toán
-                </button>
-            </div>
-            
-            <!-- Right Section: Invoice -->
-            <div class="col-lg-4">
-                <div class="invoice-card">
-                    <div class="invoice-title">Gói của bạn</div>
-                    
-                    <div class="invoice-details">
-                        <div class="invoice-details-item">
-                            <span class="invoice-details-item-label">Gói</span>
-                            <span class="invoice-details-item-value" id="plan-name">Basic</span>
-                        </div>
-                        <div class="invoice-details-item">
-                            <span class="invoice-details-item-label">Dùng thử</span>
-                            <span class="invoice-details-item-value" id="plan-trial">15 ngày</span>
-                        </div>
-                        <div class="invoice-details-item">
-                            <span class="invoice-details-item-label">Giá</span>
-                            <span class="invoice-details-item-value" id="plan-price">$15/thành viên/tháng</span>
-                        </div>
-                    </div>
-                    
-                    <div class="invoice-details mt-3">
-                        <div class="invoice-details-item">
-                            <span class="invoice-details-item-label">Tối đa member</span>
-                            <span class="invoice-details-item-value" id="plan-members">1,000</span>
-                        </div>
-                        <div class="invoice-details-item">
-                            <span class="invoice-details-item-label">AI Basic</span>
-                            <span class="invoice-details-item-value">Có</span>
-                        </div>
-                        <div class="invoice-details-item">
-                            <span class="invoice-details-item-label">Support 24/7</span>
-                            <span class="invoice-details-item-value">Có</span>
-                        </div>
-                        <div class="invoice-details-item">
-                            <span class="invoice-details-item-label">Blocks</span>
-                            <span class="invoice-details-item-value" id="plan-blocks">Không giới hạn</span>
-                        </div>
-                    </div>
-                    
-                    <div class="invoice-total">
-                        <span class="invoice-total-label">Tổng cộng</span>
-                        <span class="invoice-total-value">$0</span>
-                    </div>
-                    
-                    <div class="mt-3 pt-3 border-top">
-                        <small class="text-secondary">
-                            Hóa đơn tiếp theo: $10 (1 seat) sẽ được thanh toán tự động vào ngày 15/10/2025
-                        </small>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- Checkout Card -->
+  <div class="checkout-card">
+    <div class="section-title">Gói bạn chọn</div>
+    <div class="summary-box d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+      <div>
+        <h4 class="fw-bold mb-1">Gói Professional</h4>
+        <small class="text-secondary">Không giới hạn không gian • AI hỗ trợ • 5,000 thành viên</small>
+      </div>
+      <div class="text-md-end mt-3 mt-md-0">
+        <h3 class="text-primary fw-bold mb-0">$49 <small class="text-muted fs-6">/ người / tháng</small></h3>
+      </div>
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const plan = urlParams.get('plan') || 'basic';
-        
-        const plans = {
-            free: {
-                name: 'Free',
-                price: '$0/thành viên/tháng',
-                trial: 'Trọn đời',
-                members: '5',
-                blocks: '100'
-            },
-            basic: {
-                name: 'Basic',
-                price: '$15/thành viên/tháng',
-                trial: '15 ngày',
-                members: '1,000',
-                blocks: 'Không giới hạn'
-            },
-            advanced: {
-                name: 'Advanced',
-                price: '$23/thành viên/tháng',
-                trial: '15 ngày',
-                members: 'Không giới hạn',
-                blocks: 'Không giới hạn'
-            }
-        };
-        
-        function updateInvoice(planKey) {
-            const planData = plans[planKey];
-            document.getElementById('plan-name').textContent = planData.name;
-            document.getElementById('plan-price').textContent = planData.price;
-            document.getElementById('plan-trial').textContent = planData.trial;
-            document.getElementById('plan-members').textContent = planData.members;
-            document.getElementById('plan-blocks').textContent = planData.blocks;
-        }
-        
-        function selectPaymentMethod(method) {
-            document.querySelectorAll('.payment-method-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-        }
-        
-        function processCheckout() {
-            window.location.href = `payment.html?plan=${plan}`;
-        }
-        
-        updateInvoice(plan);
-    </script>
+
+    <div class="section-title">Thông tin thanh toán</div>
+    <form id="checkoutForm">
+      <div class="row g-4">
+        <div class="col-md-6">
+          <label class="form-label">Họ và tên</label>
+          <input type="text" class="form-control" placeholder="Nguyễn Văn A" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Email công việc</label>
+          <input type="email" class="form-control" placeholder="example@company.com" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Công ty / tổ chức</label>
+          <input type="text" class="form-control" placeholder="HKSpace Co. Ltd.">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Quốc gia</label>
+          <select class="form-select">
+            <option selected>Việt Nam</option>
+            <option>Singapore</option>
+            <option>Hoa Kỳ</option>
+            <option>Thái Lan</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Mã số thuế (tuỳ chọn)</label>
+          <input type="text" class="form-control" placeholder="0123456789">
+        </div>
+      </div>
+
+      <div class="section-title mt-5">Thanh toán</div>
+
+      <div class="summary-box">
+        <div class="d-flex justify-content-between mb-2">
+          <span>Gói Professional (1 người)</span>
+          <span>$49</span>
+        </div>
+        <div class="d-flex justify-content-between text-secondary">
+          <span>VAT (10%)</span>
+          <span>$4.9</span>
+        </div>
+        <div class="border-top mt-3 pt-3 d-flex justify-content-between align-items-center">
+          <span class="fw-bold fs-5">Tổng cộng</span>
+          <span class="fw-bold text-primary fs-4">$53.9</span>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100 mt-4">Tiếp tục thanh toán</button>
+    </form>
+
+    <p class="text-center text-secondary small mt-3">
+      Bằng việc tiếp tục, bạn đồng ý với 
+      <a href="#" class="text-decoration-none">Điều khoản dịch vụ</a> &
+      <a href="#" class="text-decoration-none">Chính sách bảo mật</a>.
+    </p>
+
+    <div class="trust-badges text-center mt-3">
+      <img src="https://img.icons8.com/color/48/lock--v1.png" alt="SSL Secure">
+      <img src="https://img.icons8.com/color/48/stripe.png" alt="Stripe">
+      <img src="https://img.icons8.com/color/48/verified-badge.png" alt="Verified">
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-light text-center py-5 text-muted">
+    <div class="container">
+      <p>© 2025 HKSpace. Mọi quyền được bảo lưu.</p>
+      <p>
+        <a href="#" class="text-primary text-decoration-none">Chính sách bảo mật</a> • 
+        <a href="#" class="text-primary text-decoration-none">Điều khoản sử dụng</a> • 
+        <a href="#" class="text-primary text-decoration-none">Liên hệ</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.getElementById("checkoutForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      alert("Thanh toán đang được xử lý...");
+      window.location.href = "payment-success.html";
+    });
+  </script>
 </body>
 </html>
